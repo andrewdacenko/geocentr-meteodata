@@ -1,0 +1,33 @@
+{
+  "name": "geocentr",
+  "version": "1.0.0",
+  "description": "Geocentr meteodata node-webkit app",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "width": 660,
+    "height": 500
+  },
+  "scripts": {
+    "install": "node ./node_modules/bower/bin/bower install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewdacenko/geocentr-meteodata.git"
+  },
+  "author": "Andrew Dacenko <a.s.dvronik@gmail.com>",
+  "contributors": [
+    "Alex Nycheporuk <nycheporuk@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewdacenko/geocentr-meteodata/issues"
+  },
+  "homepage": "https://github.com/andrewdacenko/geocentr-meteodata",
+  "dependencies": {
+    "bower": "^1.4.1",
+    "nedb": "^1.1.2",
+    "nw": "^0.12.1"
+  }
+}
