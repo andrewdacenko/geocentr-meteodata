@@ -1,0 +1,148 @@
+<h1 class="page-header">Daily Reports</h1>
+<div class="table-responsive table-responsive-heightened">
+<table class="table table-hovered">
+	<thead>
+		<tr>
+    		<th>Station</th>
+    		<th>Year</th>
+      		<th>Month</th>
+      		<th>Day</th>
+      		<th>Pool Vapour</th>
+      		<th>Pool Temperaure</th>
+      		<th>Pool Pressure</th>
+      		<th>Evaporator (3000) Vapour</th>
+      		<th>Evaporator (3000) Temperaure</th>
+      		<th>Evaporator (3000) Pressure</th>
+      		<th>Evaporator Vapour</th>
+      		<th>Evaporator Temperaure</th>
+      		<th>Evaporator Pressure</th>
+      		<th>Water Temperature</th>
+      		<th>Vapor Pressure</th>
+      		<th>Air Temperature</th>
+      		<th>Partial Pressure</th>
+      		<th>Wind Speed</th>
+      		<th>Soil Temperature</th>
+      		<th>Falls</th>
+      		<th>Pool Pressure Difference</th>
+      		<th>Evapourator Pressure Difference</th>
+      		<th>Evaporator (3000) Pressure Difference</th>
+      		<th>Water Pressure Difference</th>
+      		<th>Comment</th>
+    		<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<select class="form-control form-control-width" 
+						ng-model="daysCtrl.newDay.station_id" 
+						ng-options="station._id as station.name for station in daysCtrl.stations"></select>
+			
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="daysCtrl.newDay.year">
+			</td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.month">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.day">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.vapour_1">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_1">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_1">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.vapour_2">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_2">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_2">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.vapour_3">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_3">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_3">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_w_4">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_4">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_a">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.part_press">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.wind">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.soil_temp">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.falls">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_1">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_2">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_3">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_4">
+		    </td>
+		    <td>
+		    	<input class="form-control form-control-width" ng-model="daysCtrl.newDay.comment">
+		    </td>
+			<td>
+				<button class="btn btn-success" ng-click="daysCtrl.add()">Add</button>
+			</td>
+		</tr>
+		<tr ng-repeat="day in daysCtrl.days">
+			<td ng-bind="daysCtrl.station(day.station_id)"></td>
+			<td ng-bind="day.year"></td>
+			<td ng-bind="day.month"></td>
+			<td ng-bind="day.day"></td>
+			<td ng-bind="day.vapour_1"></td>
+			<td ng-bind="day.temp_1"></td>
+			<td ng-bind="day.press_1"></td>
+			<td ng-bind="day.vapour_2"></td>
+			<td ng-bind="day.temp_2"></td>
+			<td ng-bind="day.press_2"></td>
+			<td ng-bind="day.vapour_3"></td>
+			<td ng-bind="day.temp_3"></td>
+			<td ng-bind="day.press_3"></td>
+			<td ng-bind="day.temp_w_4"></td>
+			<td ng-bind="day.press_4"></td>
+			<td ng-bind="day.temp_a"></td>
+			<td ng-bind="day.part_press"></td>
+			<td ng-bind="day.wind"></td>
+			<td ng-bind="day.soil_temp"></td>
+			<td ng-bind="day.falls"></td>
+			<td ng-bind="day.press_diff_1"></td>
+			<td ng-bind="day.press_diff_2"></td>
+			<td ng-bind="day.press_diff_3"></td>
+			<td ng-bind="day.press_diff_4"></td>
+			<td ng-bind="day.comment"></td>
+			<td><button class="btn btn-xs btn-danger" ng-click="daysCtrl.delete(day)">Delete</button></td>
+		</tr>
+	</tbody>
+</table>
+</div>

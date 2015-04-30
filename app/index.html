@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="meteodata">
+<head>
+  <title>Geocentr</title>
+  <link rel="stylesheet" type="text/css" href="/bower/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header" ng-controller="WindowToolbar">
+      <div class="btn-group pull-right">
+        <button ng-click="windowMinimize()" type="button" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-minus"></span> Minimize
+        </button>
+        <button ng-click="windowToggleFullscreen()" type="button" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-fullscreen"></span> Fullscreen
+        </button>
+        <button ng-click="windowClose()" type="button" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-remove"></span> Close
+        </button>
+      </div>
+      <h3 class="text-muted">Geocentr - Meteodata</h3>
+    </div>
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" ui-sref-active="active"><a ui-sref="stations">Stations</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="annuals">Annual</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="months">Monthly</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="days">Daily</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="employees">Employees</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="tools">Tools</a></li>
+    </ul>
+    
+    <div ui-view></div>
+   </div>
+
+  <script src="bower/jquery/dist/jquery.js"></script>
+  <script src="bower/angular/angular.js"></script>
+  <script src="bower/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower/angular-resource/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services/EmployeesDB.js"></script>
+  <script src="js/services/StationsDB.js"></script>
+  <script src="js/services/AnnualsDB.js"></script>
+  <script src="js/services/ToolsDB.js"></script>
+  <script src="js/services/MonthsDB.js"></script>
+  <script src="js/services/DaysDB.js"></script>
+  <script src="js/controllers/EmployeesController.js"></script>
+  <script src="js/controllers/StationsController.js"></script>
+  <script src="js/controllers/AnnualsController.js"></script>
+  <script src="js/controllers/ToolsController.js"></script>
+  <script src="js/controllers/MonthsController.js"></script>
+  <script src="js/controllers/DaysController.js"></script>
+</body>
+</html>

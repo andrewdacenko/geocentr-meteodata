@@ -5,9 +5,14 @@
   "main": "index.html",
   "window": {
     "toolbar": false,
-    "width": 660,
-    "height": 500
+    "width": 800,
+    "height": 600,
+    "frame": true,
+    "position": "center",
+    "fullscreen": true,
+    "resizable": true
   },
+  "node-remote": "<local>",
   "scripts": {
     "prestart": "npm install",
     "start": "node ./node_modules/nw/bin/nw",
@@ -29,6 +34,7 @@
   "homepage": "https://github.com/andrewdacenko/geocentr-meteodata",
   "dependencies": {
     "bower": "^1.4.1",
+    "express": "^3.20.2",
     "nedb": "^1.1.2",
     "nw": "^0.12.1"
   }

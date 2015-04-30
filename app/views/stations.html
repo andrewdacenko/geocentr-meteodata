@@ -1,0 +1,63 @@
+<h1 class="page-header">Stations</h1>
+<table class="table table-hovered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Coordinates</th>
+			<th>Region</th>
+			<th>District</th>
+			<th>City</th>
+			<th>Index</th>
+			<th>Height</th>
+			<th>Open</th>
+			<th>Close</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<input class="form-control" ng-model="stationsCtrl.newStation.name">
+			</td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.coordinates">
+		    </td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.region">
+		    </td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.district">
+		    </td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.city">
+		    </td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.index">
+		    </td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.height">
+		    </td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.open">
+		    </td>
+		    <td>
+		    	<input class="form-control" ng-model="stationsCtrl.newStation.close">
+		    </td>
+			<td>
+				<button class="btn btn-success" ng-click="stationsCtrl.add()">Add</button>
+			</td>
+		</tr>
+		<tr ng-repeat="station in stationsCtrl.stations">
+			<td ng-bind="station.name"></td>
+		    <td ng-bind="station.coordinates"></td>
+		    <td ng-bind="station.region"></td>
+		    <td ng-bind="station.district"></td>
+		    <td ng-bind="station.city"></td>
+		    <td ng-bind="station.index"></td>
+		    <td ng-bind="station.height"></td>
+		    <td ng-bind="station.open"></td>
+		    <td ng-bind="station.close"></td>
+			<td><button class="btn btn-xs btn-danger" ng-click="stationsCtrl.delete(station)">Delete</button></td>
+		</tr>
+	</tbody>
+</table>

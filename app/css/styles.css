@@ -1,0 +1,11 @@
+.form-control.form-control-width {
+	min-width: 150px;
+}
+
+.table-responsive.table-responsive-heightened {
+	min-height: 400px;
+}
+
+.tooltip-inner {
+	max-width: 300px;
+}

@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html ng-app="meteodata">
+<html>
 <head>
-	<title>Geocentr</title>
-	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <style>
+    html {
+      background: linear-gradient(to bottom, #FFF 0%,#F9F9F9 100%);
+      min-height: 100%;
+    }
+  </style>
+  <script>
+    function bodyOnLoad(){
+      require('./server.js');
+      window.location.assign('http://localhost:3000/');
+    }
+  </script>
 </head>
-<body>
-	<h1 class="page-header">Hello</h1>
-
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/jquery/dist/jquery.min.map"></script>
-	<script src="bower_components/angular/angular.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<body onload="bodyOnLoad()">
+<div class="loading"></div>
 </body>
 </html>

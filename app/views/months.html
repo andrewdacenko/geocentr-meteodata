@@ -1,0 +1,164 @@
+<h1 class="page-header">Montly Reports</h1>
+<div class="table-responsive table-responsive-heightened">
+<table class="table table-hovered">
+	<thead>
+		<tr>
+    		<th>Station</th>
+			<th>Year</th>
+			<th>Month</th>
+			<th>Tools</th>
+			<th>Pool Square</th>
+			<th>Pool Depth</th>
+			<th>Pool External Height</th>
+			<th>Pool Internal Height</th>
+			<th>Vapour Square</th>
+			<th>Vapour Depth</th>
+			<th>Vapour External Height</th>
+			<th>Vapour Internal Height</th>
+			<th>Vapor (3000) Square</th>
+			<th>Vapor (3000) Depth</th>
+			<th>Vapor (3000) External Height</th>
+			<th>Vapor (3000) Internal Height</th>
+			<th>Rain Gauge Square</th>
+			<th>Rain Gauge Depth</th>
+			<th>Rain Gauge External Height</th>
+			<th>Rain Gauge Internal Height</th>
+			<th>Rain Glass Number</th>
+			<th>Rain Glass Volume</th>
+			<th>Rain Glass Range</th>
+			<th>Creator</th>
+			<th>Checker</th>
+			<th>Creation_date</th>
+			<th>Head</th>
+			<th>Comments</th>
+    		<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<select class="form-control form-control-width" 
+						ng-model="monthsCtrl.newMonth.station_id" 
+						ng-options="station._id as station.name for station in monthsCtrl.stations"></select>
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.year">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.month">
+			</td>
+			<td>
+				<button class="btn btn-default" ng-click="monthsCtrl.checkTools()">Tools</button>
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_1">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_1">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_1">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_1">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_2">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_2">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_2">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_2">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_3">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_3">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_3">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_3">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_4">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_4">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_4">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_4">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.rg_number">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.rg_volume">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.rg_range">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.creator">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.checker">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.creation_date">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.head">
+			</td>
+			<td>
+				<input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.comments">
+			</td>
+			<td>
+				<button class="btn btn-success" ng-click="monthsCtrl.add()">Add</button>
+			</td>
+		</tr>
+		<tr ng-repeat="month in monthsCtrl.months">
+			<td ng-bind="monthsCtrl.station(month.station_id)"></td>
+			<td ng-bind="month.year"></td>
+			<td ng-bind="month.month"></td>
+			<td>
+				<button tooltip-html-unsafe="{{monthsCtrl.tooltip(month)}}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench"></i></button>
+			</td>
+			<td ng-bind="month.square_1"></td>
+			<td ng-bind="month.depth_1"></td>
+			<td ng-bind="month.external_height_1"></td>
+			<td ng-bind="month.internal_height_1"></td>
+			<td ng-bind="month.square_2"></td>
+			<td ng-bind="month.depth_2"></td>
+			<td ng-bind="month.external_height_2"></td>
+			<td ng-bind="month.internal_height_2"></td>
+			<td ng-bind="month.square_3"></td>
+			<td ng-bind="month.depth_3"></td>
+			<td ng-bind="month.external_height_3"></td>
+			<td ng-bind="month.internal_height_3"></td>
+			<td ng-bind="month.square_4"></td>
+			<td ng-bind="month.depth_4"></td>
+			<td ng-bind="month.external_height_4"></td>
+			<td ng-bind="month.internal_height_4"></td>
+			<td ng-bind="month.rg_number"></td>
+			<td ng-bind="month.rg_volume"></td>
+			<td ng-bind="month.rg_range"></td>
+			<td ng-bind="month.creator"></td>
+			<td ng-bind="month.checker"></td>
+			<td ng-bind="month.creation_date"></td>
+			<td ng-bind="month.head"></td>
+			<td ng-bind="month.comments"></td>
+			<td><button class="btn btn-xs btn-danger" ng-click="monthsCtrl.delete(month)">Delete</button></td>
+		</tr>
+	</tbody>
+</table>
+</div>

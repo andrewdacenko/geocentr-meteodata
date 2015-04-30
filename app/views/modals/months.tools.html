@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h3 class="modal-title">Check Tools Status</h3>
+</div>
+<div class="modal-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tool</th>
+                <th>Number</th>
+                <th>Check Date</th>
+                <th>Test Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="tool in monthsToolsCtrl.tools">
+                <td ng-bind="tool.name"></td>
+                <td>
+                    <input type="number" 
+                           class="form-control" 
+                           ng-model="monthsToolsCtrl.selected[tool._id].number">
+                </td>
+                <td>
+                    <input type="number" 
+                           class="form-control" 
+                           min="1"
+                           max="31"
+                           ng-model="monthsToolsCtrl.selected[tool._id].check">
+                </td>
+                <td>
+                    <input type="number" 
+                           class="form-control" 
+                           min="1"
+                           max="31"
+                           ng-model="monthsToolsCtrl.selected[tool._id].test">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="monthsToolsCtrl.ok()">OK</button>
+    <button class="btn btn-warning" ng-click="monthsToolsCtrl.cancel()">Cancel</button>
+</div>

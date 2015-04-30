@@ -1,0 +1,23 @@
+<h1 class="page-header">Tools</h1>
+<table class="table table-hovered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<input class="form-control" ng-model="toolsCtrl.newTool.name">
+			</td>
+			<td>
+				<button class="btn btn-success" ng-click="toolsCtrl.add()">Add</button>
+			</td>
+		</tr>
+		<tr ng-repeat="tool in toolsCtrl.tools">
+			<td ng-bind="tool.name"></td>
+			<td><button class="btn btn-xs btn-danger" ng-click="toolsCtrl.delete(tool)">Delete</button></td>
+		</tr>
+	</tbody>
+</table>
