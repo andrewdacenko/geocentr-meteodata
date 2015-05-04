@@ -1,183 +1,183 @@
 <h1 class="page-header">Annual Reports</h1>
+
 <div class="table-responsive table-responsive-heightened">
-<table class="table table-hovered">
-	<thead>
-		<tr>
-    		<th>Station</th>
-    		<th>Year</th>
-    		<th>Number</th>
-    		<th>Angle Continental</th>
-    		<th>Angle Shore</th>
-    		<th>Station Page</th>
-    		<th>Observation Page</th>
-    		<th>Comment</th>
-    		<th>Snow Melting</th>
-    		<th>Ground Observation Begin</th>
-    		<th>Ground Observation End</th>
-    		<th>Water Freezing</th>
-    		<th>Ice Clean</th>
-    		<th>Water Observation Begin</th>
-    		<th>Water Observation End</th>
-    		<th>Ice Cover</th>
-    		<th>Action</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-				<select class="form-control form-control-width" 
-						ng-model="annualsCtrl.newAnnual.station_id" 
-						ng-options="station._id as station.name for station in annualsCtrl.stations"></select>
-			
-			</td>
-			<td>
-				<input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.year">
-			</td>
-			<td>
-				<input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.number">
-			</td>
-			<td>
-				<input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.angle_continental">
-			</td>
-			<td>
-				<input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.angle_shore">
-			</td>
-			<td>
-				<input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.page_station">
-			</td>
-			<td>
-				<input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.page_observation">
-			</td>
-			<td>
-				<input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.comment">
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.snow_melting"
-						   is-open="annualsCtrl.isOpen.snow_melting">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'snow_melting')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.observation_begin_g"
-						   is-open="annualsCtrl.isOpen.observation_begin_g">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_begin_g')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.observation_end_g"
-						   is-open="annualsCtrl.isOpen.observation_end_g">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_end_g')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.water_freezing"
-						   is-open="annualsCtrl.isOpen.water_freezing">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'water_freezing')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.ice_clean"
-						   is-open="annualsCtrl.isOpen.ice_clean">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'ice_clean')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.observation_begin_w"
-						   is-open="annualsCtrl.isOpen.observation_begin_w">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_begin_w')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.observation_end_w"
-						   is-open="annualsCtrl.isOpen.observation_end_w">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_end_w')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<p class="input-group">
-					<input class="form-control form-control-width"
-						   datepicker-popup
-						   ng-model="annualsCtrl.newAnnual.ice_cover"
-						   is-open="annualsCtrl.isOpen.ice_cover">
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="annualsCtrl.open($event, 'ice_cover')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</p>
-			</td>
-			<td>
-				<button class="btn btn-success" ng-click="annualsCtrl.add()">Add</button>
-			</td>
-		</tr>
-		<tr ng-repeat="annual in annualsCtrl.annuals">
-			<td ng-bind="annualsCtrl.station(annual.station_id)"></td>
-			<td ng-bind="annual.year"></td>
-			<td ng-bind="annual.number"></td>
-			<td ng-bind="annual.angle_continental"></td>
-			<td ng-bind="annual.angle_shore"></td>
-			<td ng-bind="annual.page_station"></td>
-			<td ng-bind="annual.page_observation"></td>
-			<td ng-bind="annual.comment"></td>
-			<td ng-bind="annual.snow_melting | date"></td>
-			<td ng-bind="annual.observation_begin_g | date"></td>
-			<td ng-bind="annual.observation_end_g | date"></td>
-			<td ng-bind="annual.water_freezing | date"></td>
-			<td ng-bind="annual.ice_clean | date"></td>
-			<td ng-bind="annual.observation_begin_w | date"></td>
-			<td ng-bind="annual.observation_end_w | date"></td>
-			<td ng-bind="annual.ice_cover | date"></td>
-			<td><button class="btn btn-xs btn-danger" ng-click="annualsCtrl.delete(annual)">Delete</button></td>
-		</tr>
-	</tbody>
-</table>
+  <table class="table table-hovered">
+    <thead>
+      <tr>
+        <th>Station</th>
+        <th>Year</th>
+        <th>Number</th>
+        <th>Angle Continental</th>
+        <th>Angle Shore</th>
+        <th>Station Page</th>
+        <th>Observation Page</th>
+        <th>Comment</th>
+        <th>Snow Melting</th>
+        <th>Ground Observation Begin</th>
+        <th>Ground Observation End</th>
+        <th>Water Freezing</th>
+        <th>Ice Clean</th>
+        <th>Water Observation Begin</th>
+        <th>Water Observation End</th>
+        <th>Ice Cover</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <select class="form-control form-control-width" 
+            ng-model="annualsCtrl.newAnnual.station_id" 
+            ng-options="station._id as station.name for station in annualsCtrl.stations"></select>
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.year">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.number">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.angle_continental">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.angle_shore">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.page_station">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.page_observation">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.comment">
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.snow_melting"
+                 is-open="annualsCtrl.isOpen.snow_melting">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'snow_melting')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.observation_begin_g"
+                 is-open="annualsCtrl.isOpen.observation_begin_g">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_begin_g')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.observation_end_g"
+                 is-open="annualsCtrl.isOpen.observation_end_g">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_end_g')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.water_freezing"
+                 is-open="annualsCtrl.isOpen.water_freezing">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'water_freezing')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.ice_clean"
+                 is-open="annualsCtrl.isOpen.ice_clean">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'ice_clean')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.observation_begin_w"
+                 is-open="annualsCtrl.isOpen.observation_begin_w">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_begin_w')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.observation_end_w"
+                 is-open="annualsCtrl.isOpen.observation_end_w">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_end_w')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <p class="input-group">
+            <input class="form-control form-control-width"
+                 datepicker-popup
+                 ng-model="annualsCtrl.newAnnual.ice_cover"
+                 is-open="annualsCtrl.isOpen.ice_cover">
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'ice_cover')">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </p>
+        </td>
+        <td>
+          <button class="btn btn-success" ng-click="annualsCtrl.add()">Add</button>
+        </td>
+      </tr>
+      <tr ng-repeat="annual in annualsCtrl.annuals">
+        <td ng-bind="annualsCtrl.station(annual.station_id)"></td>
+        <td ng-bind="annual.year"></td>
+        <td ng-bind="annual.number"></td>
+        <td ng-bind="annual.angle_continental"></td>
+        <td ng-bind="annual.angle_shore"></td>
+        <td ng-bind="annual.page_station"></td>
+        <td ng-bind="annual.page_observation"></td>
+        <td ng-bind="annual.comment"></td>
+        <td ng-bind="annual.snow_melting | date"></td>
+        <td ng-bind="annual.observation_begin_g | date"></td>
+        <td ng-bind="annual.observation_end_g | date"></td>
+        <td ng-bind="annual.water_freezing | date"></td>
+        <td ng-bind="annual.ice_clean | date"></td>
+        <td ng-bind="annual.observation_begin_w | date"></td>
+        <td ng-bind="annual.observation_end_w | date"></td>
+        <td ng-bind="annual.ice_cover | date"></td>
+        <td><button class="btn btn-xs btn-danger" ng-click="annualsCtrl.delete(annual)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

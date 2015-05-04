@@ -1,50 +1,51 @@
 <h1 class="page-header">Employees</h1>
+
 <table class="table table-hovered">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Middlename</th>
-			<th>Surname</th>
-			<th>Station</th>
-			<th>Position</th>
-			<th>Description</th>
-			<th>Action</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-				<input class="form-control" ng-model="employeesCtrl.newEmployee.name">
-			</td>
-			<td>
-				<input class="form-control" ng-model="employeesCtrl.newEmployee.middlename">
-			</td>
-			<td>
-				<input class="form-control" ng-model="employeesCtrl.newEmployee.surname">
-			</td>
-			<td>
-				<select class="form-control" 
-						ng-model="employeesCtrl.newEmployee.station_id" 
-						ng-options="station._id as station.name for station in employeesCtrl.stations"></select>
-			</td>
-			<td>
-				<input class="form-control" ng-model="employeesCtrl.newEmployee.position">
-			</td>
-			<td>
-				<input class="form-control" ng-model="employeesCtrl.newEmployee.description">
-			</td>
-			<td>
-				<button class="btn btn-success" ng-click="employeesCtrl.add()">Add</button>
-			</td>
-		</tr>
-		<tr ng-repeat="employee in employeesCtrl.employees">
-			<td ng-bind="employee.name"></td>
-			<td ng-bind="employee.middlename"></td>
-			<td ng-bind="employee.surname"></td>
-			<td ng-bind="employeesCtrl.station(employee.station_id)"></td>
-			<td ng-bind="employee.position"></td>
-			<td ng-bind="employee.description"></td>
-			<td><button class="btn btn-xs btn-danger" ng-click="employeesCtrl.delete(employee)">Delete</button></td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Middlename</th>
+      <th>Surname</th>
+      <th>Station</th>
+      <th>Position</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <input class="form-control" ng-model="employeesCtrl.newEmployee.name">
+      </td>
+      <td>
+        <input class="form-control" ng-model="employeesCtrl.newEmployee.middlename">
+      </td>
+      <td>
+        <input class="form-control" ng-model="employeesCtrl.newEmployee.surname">
+      </td>
+      <td>
+        <select class="form-control" 
+          ng-model="employeesCtrl.newEmployee.station_id" 
+          ng-options="station._id as station.name for station in employeesCtrl.stations"></select>
+      </td>
+      <td>
+        <input class="form-control" ng-model="employeesCtrl.newEmployee.position">
+      </td>
+      <td>
+        <input class="form-control" ng-model="employeesCtrl.newEmployee.description">
+      </td>
+      <td>
+        <button class="btn btn-success" ng-click="employeesCtrl.add()">Add</button>
+      </td>
+    </tr>
+    <tr ng-repeat="employee in employeesCtrl.employees">
+      <td ng-bind="employee.name"></td>
+      <td ng-bind="employee.middlename"></td>
+      <td ng-bind="employee.surname"></td>
+      <td ng-bind="employeesCtrl.station(employee.station_id)"></td>
+      <td ng-bind="employee.position"></td>
+      <td ng-bind="employee.description"></td>
+      <td><button class="btn btn-xs btn-danger" ng-click="employeesCtrl.delete(employee)">Delete</button></td>
+    </tr>
+  </tbody>
 </table>
