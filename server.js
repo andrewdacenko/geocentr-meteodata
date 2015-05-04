@@ -141,8 +141,56 @@ app.get('/annuals/day', function(req, res) {
   var year = req.query.year || 2015;
   var start = req.query.start || 1;
   var end = req.query.end || 12;
+  async.waterfall([
 
-  require('fs').readFile(path.join(__dirname, 'templates', 'annual.xlsx'), 'utf8', function(err, data) {
+    function findAnnuals(callback) {
+      db.annuals.find({
+        year: year
+      }, function(err, annuals) {
+        if (err) return callback(err);
+        callback(null, annuals);
+      });
+    },
+    function findDays(annuals, callback) {
+      db.days.find({
+        year: year
+      }, function(err, days) {
+        if (err) return callback(err);
+        callback(null, annuals, days);
+      });
+    },
+    function createTables(annuals, days, callback) {
+      var calcMiddleValue = function(arr, count) {
+        var count = count || arr.length;
+        var result = 0;
+        for (var i = 0; i < count; i++) {
+          result += +arr[i];
+        };
+        return result / count;
+      };
+
+      var obj = {};
+
+      for (var i = 0; i < days.length; i++) {
+        var day = days[i];
+        obj['table' + day.month][day.day] = day;
+      };
+
+      for (var i = start; i <= end; i++) {
+        var table = [];
+        var days =
+      }
+      db.annuals.find({
+        year: year
+      }, function(err, annuals) {
+        if (err) return callback(err);
+        callback(null, annuals);
+      });
+    },
+
+  ]);
+
+  require('fs').readFile(path.join(__dirname, 'templates', 'tmp.json'), 'utf8', function(err, data) {
     if (err) {
       res.writeHead(400, {
         'Content-Type': 'text/plain'
@@ -153,7 +201,7 @@ app.get('/annuals/day', function(req, res) {
 
     data = JSON.parse(data);
 
-    var template_file = path.join(__dirname, 'templates', 'annual.xlsx');
+    var template_file = path.join(__dirname, 'templates', 'tmp.xlsx');
 
     excelReport(template_file, data, function(error, binary) {
       if (error) {
