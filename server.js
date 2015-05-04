@@ -137,6 +137,15 @@ app.get('/annuals', function(req, res) {
   });
 });
 
+app.get('/annuals/day', function(req, res) {
+  var year = req.query.year;
+  var start = req.query.start;
+  var end = req.query.end;
+
+
+
+});
+
 app.get('/annuals/report', function(req, res) {
   var year = req.query.year;
 
