@@ -2,6 +2,8 @@ var
   express = require("express"),
   path = require("path"),
   nedb = require('nedb'),
+  async = require('async'),
+  excelReport = require('excel-report'),
   employeesDB = "db/employees.db",
   annualsDB = "db/annuals.db",
   monthsDB = "db/months.db",
@@ -134,6 +136,71 @@ app.get('/annuals', function(req, res) {
     res.send(result);
   });
 });
+
+app.get('/annuals/report', function(req, res) {
+  var year = req.query.year;
+
+  async.waterfall([
+
+    function findAnnuals(callback) {
+      db.annuals.find({
+        year: year
+      }, function(err, annuals) {
+        if (err) return callback(err);
+        callback(null, annuals);
+      });
+    },
+
+    function collectStations(annuals, callback) {
+      var ids = annuals.map(function(i) {
+        return i.station_id;
+      });
+
+      db.stations.find({
+        _id: {
+          $in: ids
+        }
+      }, function(err, stations) {
+        if (err) return callback(err);
+
+        var data = annuals.map(function(i) {
+          i.station = stations.filter(function(s) {
+            return i.station_id === s._id;
+          })[0].name;
+
+          return i;
+        });
+
+        callback(null, {
+          s: data,
+          year: year + ' р.'
+        });
+      })
+    },
+  ], function(err, data) {
+    if (err) {
+      return res.end(error);
+    };
+
+    console.log(data)
+
+    var template_file = path.join(__dirname, 'templates', 'annual.xlsx');
+
+    excelReport(template_file, data, function(error, binary) {
+      if (error) {
+        res.writeHead(400, {
+          'Content-Type': 'text/plain'
+        });
+        res.end(error);
+        return;
+      };
+
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+      res.setHeader("Content-Disposition", "attachment; filename=annual" + year + ".xlsx");
+      res.end(binary, 'binary');
+    })
+  })
+})
 
 app.post('/annuals', function(req, res) {
   var item = req.body;

@@ -1,5 +1,15 @@
 <h1 class="page-header">Annual Reports</h1>
 
+<div class="form-inline">
+  <label>Generate report: </label>
+  <div class="input-group input-group-sm" style="width:200px;">
+    <input type="text" class="form-control" placeholder="2015" ng-model="year">
+    <span class="input-group-btn">
+      <a ng-href="annuals/report?year={{year || 2015}}" class="btn btn-default">.xlsx</a>
+    </span>
+  </div>
+</div>
+
 <div class="table-responsive table-responsive-heightened">
   <table class="table table-hovered">
     <thead>
