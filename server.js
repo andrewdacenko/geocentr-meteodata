@@ -322,6 +322,22 @@ app.post('/tools', function(req, res) {
   });
 });
 
+app.put('/tools/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.tools.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
+    }
+  });
+});
+
 app.delete('/tools/:id', function(req, res) {
   var id = req.params.id;
   db.tools.remove({

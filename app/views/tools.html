@@ -1,25 +1,42 @@
-<h1 class="page-header">Tools</h1>
+<h1 class="page-header">Tools
+  <small>
+    <a class="btn btn-xs btn-success" ng-click="toolsCtrl.addOrEdit()">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
+  </small>
+</h1>
 
 <table class="table table-hovered">
   <thead>
     <tr>
-      <th>Name</th>
+      <th ng-class="{'main-order': toolsCtrl.isOrderedBy('name')}" 
+          ng-click="toolsCtrl.orderBy('name')">
+          Name
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!toolsCtrl.reverse, 'glyphicon-menu-up': !toolsCtrl.reverse}" ng-if="toolsCtrl.isOrderedBy('name')"></i>
+      </th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <input class="form-control" ng-model="toolsCtrl.newTool.name">
+        <input class="form-control" ng-model="toolsCtrl.filter.name">
       </td>
       <td>
-        <button class="btn btn-success" ng-click="toolsCtrl.add()">Add</button>
+        <button class="btn btn-success" ng-click="toolsCtrl.clearFilter()">Clear</button>
       </td>
     </tr>
-    <tr ng-repeat="tool in toolsCtrl.tools">
+    <tr ng-repeat="tool in toolsCtrl.tools | filter:toolsCtrl.filter | orderBy:toolsCtrl.order:toolsCtrl.reverse">
       <td ng-bind="tool.name"></td>
       <td>
-        <button class="btn btn-xs btn-danger" ng-click="toolsCtrl.delete(tool)">Delete</button>
+        <div class="btn-group">
+          <button class="btn btn-xs btn-primary" ng-click="toolsCtrl.addOrEdit(tool)">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </button>
+          <button class="btn btn-xs btn-danger" ng-click="toolsCtrl.delete(tool)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </button>
+        </div>
       </td>
     </tr>
   </tbody>
