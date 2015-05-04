@@ -11,6 +11,8 @@
     vm.months = months;
     vm.Dates = Dates;
     vm.stations = stations;
+    vm.order = '';
+    vm.reverse = false;
 
     var month = {
       station_id: '',
@@ -47,11 +49,30 @@
 
     vm.filter = angular.copy(months);
 
-    vm.open = function($event, key) {
-      $event.preventDefault();
-      $event.stopPropagation();
+    vm.isOrderedBy = function(field) {
+      return vm.order === field;
+    }
 
-      vm.isOpen[key] = true;
+    vm.orderBy = function(field) {
+      if (vm.order === field) {
+        vm.reverse = !vm.reverse;
+      };
+
+      vm.order = field;
+    }
+
+    vm.station = function(_id) {
+      var station = vm.stations.filter(function(i) {
+        return i._id === _id
+      });
+
+      return station.length ? station[0].name : '';
+    }
+
+    vm.clearFilter = function() {
+      vm.filter = angular.copy(month);
+      vm.reverse = false;
+      vm.order = '';
     }
 
     vm.addOrEdit = function(existingMonth) {
@@ -119,23 +140,6 @@
         '</tr></tbody></table>'
       ].join('');
     }
-
-    vm.station = function(_id) {
-      var station = vm.stations.filter(function(i) {
-        return i._id === _id
-      });
-
-      return station.length ? station[0].name : '';
-    }
-
-    vm.add = function() {
-      var month = angular.copy(vm.newMonth);
-
-      MonthsDB.add(month, function(data) {
-        vm.newMonth = angular.copy(newMonth);
-        vm.months.unshift(data);
-      });
-    };
 
     vm.delete = function(month) {
       MonthsDB.delete({

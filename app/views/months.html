@@ -157,10 +157,14 @@
             ng-options="station._id as station.name for station in monthsCtrl.stations"></select>
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.year">
+          <select class="form-control form-control-width" 
+            ng-model="monthsCtrl.filter.year" 
+            ng-options="year as year for year in monthsCtrl.Dates.years"></select>
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.month">
+          <select class="form-control form-control-width" 
+            ng-model="monthsCtrl.filter.month" 
+            ng-options="month.index as month.name for month in monthsCtrl.Dates.months"></select>
         </td>
         <td></td>
         <td>

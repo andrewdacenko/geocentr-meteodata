@@ -1,4 +1,10 @@
-<h1 class="page-header">Annual Reports</h1>
+<h1 class="page-header">Annual Reports
+  <small>
+    <a class="btn btn-xs btn-success" ng-click="annualsCtrl.addOrEdit()">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
+  </small>
+</h1>
 
 <a href="/annuals/reports">Reports</a>
 
@@ -16,22 +22,86 @@
   <table class="table table-hovered">
     <thead>
       <tr>
-        <th>Station</th>
-        <th>Year</th>
-        <th>Number</th>
-        <th>Angle Continental</th>
-        <th>Angle Shore</th>
-        <th>Station Page</th>
-        <th>Observation Page</th>
-        <th>Comment</th>
-        <th>Snow Melting</th>
-        <th>Ground Observation Begin</th>
-        <th>Ground Observation End</th>
-        <th>Water Freezing</th>
-        <th>Ice Clean</th>
-        <th>Water Observation Begin</th>
-        <th>Water Observation End</th>
-        <th>Ice Cover</th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('station_id')">
+            Station
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('station_id')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('year')">
+            Year
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('year')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('number')">
+            Number
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('number')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('angle_continental')">
+            Angle Continental
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('angle_continental')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('angle_shore')">
+            Angle Shore
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('angle_shore')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('page_station')">
+            Station Page
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('page_station')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('page_observation')">
+            Observation Page
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('page_observation')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('comment')">
+            Comment
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('comment')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('snow_melting')">
+            Snow Melting
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('snow_melting')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('observation_begin_g')">
+            Ground Observation Begin
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_begin_g')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('observation_end_g')">
+            Ground Observation End
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_end_g')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('water_freezing')">
+            Water Freezing
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('water_freezing')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('ice_clean')">
+            Ice Clean
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('ice_clean')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('observation_begin_w')">
+            Water Observation Begin
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_begin_w')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('observation_end_w')">
+            Water Observation End
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_end_w')"></i>
+        </th>
+        <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
+            ng-click="annualsCtrl.orderBy('ice_cover')">
+            Ice Cover
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('ice_cover')"></i>
+        </th>
         <th>Action</th>
       </tr>
     </thead>
@@ -39,37 +109,37 @@
       <tr>
         <td>
           <select class="form-control form-control-width" 
-            ng-model="annualsCtrl.newAnnual.station_id" 
+            ng-model="annualsCtrl.filter.station_id" 
             ng-options="station._id as station.name for station in annualsCtrl.stations"></select>
         </td>
         <td>
           <select class="form-control form-control-width" 
-            ng-model="annualsCtrl.newAnnual.year" 
+            ng-model="annualsCtrl.filter.year" 
             ng-options="year as year for year in annualsCtrl.Dates.years"></select>
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.number">
+          <input class="form-control form-control-width" ng-model="annualsCtrl.filter.number">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.angle_continental">
+          <input class="form-control form-control-width" ng-model="annualsCtrl.filter.angle_continental">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.angle_shore">
+          <input class="form-control form-control-width" ng-model="annualsCtrl.filter.angle_shore">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.page_station">
+          <input class="form-control form-control-width" ng-model="annualsCtrl.filter.page_station">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.page_observation">
+          <input class="form-control form-control-width" ng-model="annualsCtrl.filter.page_observation">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.comment">
+          <input class="form-control form-control-width" ng-model="annualsCtrl.filter.comment">
         </td>
         <td>
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.snow_melting"
+                 ng-model="annualsCtrl.filter.snow_melting"
                  is-open="annualsCtrl.isOpen.snow_melting">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'snow_melting')">
@@ -82,7 +152,7 @@
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.observation_begin_g"
+                 ng-model="annualsCtrl.filter.observation_begin_g"
                  is-open="annualsCtrl.isOpen.observation_begin_g">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_begin_g')">
@@ -95,7 +165,7 @@
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.observation_end_g"
+                 ng-model="annualsCtrl.filter.observation_end_g"
                  is-open="annualsCtrl.isOpen.observation_end_g">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_end_g')">
@@ -108,7 +178,7 @@
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.water_freezing"
+                 ng-model="annualsCtrl.filter.water_freezing"
                  is-open="annualsCtrl.isOpen.water_freezing">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'water_freezing')">
@@ -121,7 +191,7 @@
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.ice_clean"
+                 ng-model="annualsCtrl.filter.ice_clean"
                  is-open="annualsCtrl.isOpen.ice_clean">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'ice_clean')">
@@ -134,7 +204,7 @@
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.observation_begin_w"
+                 ng-model="annualsCtrl.filter.observation_begin_w"
                  is-open="annualsCtrl.isOpen.observation_begin_w">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_begin_w')">
@@ -147,7 +217,7 @@
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.observation_end_w"
+                 ng-model="annualsCtrl.filter.observation_end_w"
                  is-open="annualsCtrl.isOpen.observation_end_w">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'observation_end_w')">
@@ -160,7 +230,7 @@
           <p class="input-group">
             <input class="form-control form-control-width"
                  datepicker-popup
-                 ng-model="annualsCtrl.newAnnual.ice_cover"
+                 ng-model="annualsCtrl.filter.ice_cover"
                  is-open="annualsCtrl.isOpen.ice_cover">
             <span class="input-group-btn">
               <button class="btn btn-default" ng-click="annualsCtrl.open($event, 'ice_cover')">
@@ -170,10 +240,10 @@
           </p>
         </td>
         <td>
-          <button class="btn btn-success" ng-click="annualsCtrl.add()">Add</button>
+          <button class="btn btn-success" ng-click="annualsCtrl.clearFilter()">Clear</button>
         </td>
       </tr>
-      <tr ng-repeat="annual in annualsCtrl.annuals">
+      <tr ng-repeat="annual in annualsCtrl.annuals | filter:annualsCtrl.filter | orderBy:annualsCtrl.order:annualsCtrl.reverse">
         <td ng-bind="annualsCtrl.station(annual.station_id)"></td>
         <td ng-bind="annual.year"></td>
         <td ng-bind="annual.number"></td>
@@ -190,7 +260,16 @@
         <td ng-bind="annual.observation_begin_w | date"></td>
         <td ng-bind="annual.observation_end_w | date"></td>
         <td ng-bind="annual.ice_cover | date"></td>
-        <td><button class="btn btn-xs btn-danger" ng-click="annualsCtrl.delete(annual)">Delete</button></td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-xs btn-primary" ng-click="annualsCtrl.addOrEdit(annual)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+            <button class="btn btn-xs btn-danger" ng-click="annualsCtrl.delete(annual)">
+              <i class="glyphicon glyphicon-trash"></i>
+            </button>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

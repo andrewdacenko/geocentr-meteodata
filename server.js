@@ -251,6 +251,22 @@ app.post('/annuals', function(req, res) {
   });
 });
 
+app.put('/annuals/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.annuals.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
+    }
+  });
+});
+
 app.delete('/annuals/:id', function(req, res) {
   var id = req.params.id;
   db.annuals.remove({
