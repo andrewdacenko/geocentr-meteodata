@@ -1,5 +1,7 @@
 <h1 class="page-header">Annual Reports</h1>
 
+<a href="/annuals/reports">Reports</a>
+
 <div class="form-inline">
   <label>Generate report: </label>
   <div class="input-group input-group-sm" style="width:200px;">
@@ -41,7 +43,9 @@
             ng-options="station._id as station.name for station in annualsCtrl.stations"></select>
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.year">
+          <select class="form-control form-control-width" 
+            ng-model="annualsCtrl.newAnnual.year" 
+            ng-options="year as year for year in annualsCtrl.Dates.years"></select>
         </td>
         <td>
           <input class="form-control form-control-width" ng-model="annualsCtrl.newAnnual.number">

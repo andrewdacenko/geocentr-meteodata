@@ -3,17 +3,18 @@
     .module('meteodata.controllers')
     .controller('AnnualsController', AnnualsController);
 
-  AnnualsController.$inject = ['AnnualsDB', 'annuals', 'stations'];
+  AnnualsController.$inject = ['AnnualsDB', 'Dates', 'annuals', 'stations'];
 
-  function AnnualsController(AnnualsDB, annuals, stations) {
+  function AnnualsController(AnnualsDB, Dates, annuals, stations) {
     var vm = this;
 
+    vm.Dates = Dates;
     vm.annuals = annuals;
     vm.stations = stations;
 
     var newAnnual = {
-      station_id: '',
-      year: '',
+      station_id: stations[0] ? stations[0]._id : '',
+      year: Dates.years[0],
       number: '',
       angle_continental: '',
       angle_shore: '',

@@ -1,4 +1,13 @@
 (function() {
+  var year = (new Date()).getFullYear();
+  var years = Array.apply(null, {
+    length: 100
+  }).map(yearsMapFn);
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map(monthsMapFn);
+  var days = Array.apply(null, {
+    length: 31
+  }).map(daysMapFn);
+
   angular.module('meteodata.controllers', []);
   angular.module('meteodata.services', []);
 
@@ -10,6 +19,11 @@
       'meteodata.controllers',
       'meteodata.services'
     ])
+    .constant('Dates', {
+      years: years,
+      months: months,
+      days: days
+    })
     .config(stateConfig)
     .controller('WindowToolbar', WindowToolbar)
     .factory('Window', function() {
@@ -140,4 +154,20 @@
       Window.close();
     };
   }
+
+  function yearsMapFn(i, index) {
+    return year - index;
+  };
+
+  function monthsMapFn(name, index) {
+    return {
+      name: name,
+      index: index + 1
+    }
+  };
+
+  function daysMapFn(i, index) {
+    return index + 1;
+  };
+
 })();

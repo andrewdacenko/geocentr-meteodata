@@ -138,12 +138,37 @@ app.get('/annuals', function(req, res) {
 });
 
 app.get('/annuals/day', function(req, res) {
-  var year = req.query.year;
-  var start = req.query.start;
-  var end = req.query.end;
+  var year = req.query.year || 2015;
+  var start = req.query.start || 1;
+  var end = req.query.end || 12;
 
+  require('fs').readFile(path.join(__dirname, 'templates', 'annual.xlsx'), 'utf8', function(err, data) {
+    if (err) {
+      res.writeHead(400, {
+        'Content-Type': 'text/plain'
+      });
+      res.end(error);
+      return;
+    };
 
+    data = JSON.parse(data);
 
+    var template_file = path.join(__dirname, 'templates', 'annual.xlsx');
+
+    excelReport(template_file, data, function(error, binary) {
+      if (error) {
+        res.writeHead(400, {
+          'Content-Type': 'text/plain'
+        });
+        res.end(error);
+        return;
+      };
+
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+      res.setHeader("Content-Disposition", "attachment; filename=day" + year + start + end + ".xlsx");
+      res.end(binary, 'binary');
+    })
+  })
 });
 
 app.get('/annuals/report', function(req, res) {

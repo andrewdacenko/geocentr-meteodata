@@ -40,13 +40,19 @@
             ng-options="station._id as station.name for station in daysCtrl.stations"></select>
         </td>
         <td>
-          <input type="number" class="form-control form-control-width" ng-model="daysCtrl.newDay.year">
+          <select class="form-control form-control-width" 
+            ng-model="daysCtrl.newDay.year" 
+            ng-options="year as year for year in daysCtrl.Dates.years"></select>
         </td>
         <td>
-          <input type="number" class="form-control form-control-width" ng-model="daysCtrl.newDay.month">
+          <select class="form-control form-control-width" 
+            ng-model="daysCtrl.newDay.month" 
+            ng-options="month.index as month.name for month in daysCtrl.Dates.months"></select>
         </td>
         <td>
-          <input type="number" class="form-control form-control-width" ng-model="daysCtrl.newDay.day">
+          <select class="form-control form-control-width" 
+            ng-model="daysCtrl.newDay.day" 
+            ng-options="day as day for day in daysCtrl.Dates.days"></select>
         </td>
         <td>
           <input class="form-control form-control-width" ng-model="daysCtrl.newDay.vapour_1">

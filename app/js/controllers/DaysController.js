@@ -3,11 +3,12 @@
     .module('meteodata.controllers')
     .controller('DaysController', DaysController);
 
-  DaysController.$inject = ['DaysDB', 'days', 'stations'];
+  DaysController.$inject = ['DaysDB', 'Dates', 'days', 'stations'];
 
-  function DaysController(DaysDB, days, stations) {
+  function DaysController(DaysDB, Dates, days, stations) {
     var vm = this;
 
+    vm.Dates = Dates;
     vm.days = days;
     vm.stations = stations;
 
