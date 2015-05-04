@@ -1,37 +1,151 @@
-<h1 class="page-header">Montly Reports</h1>
+<h1 class="page-header">Montly Reports
+  <small>
+    <a class="btn btn-xs btn-success" ng-click="monthsCtrl.addOrEdit()">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
+  </small>
+</h1>
 
 <div class="table-responsive table-responsive-heightened">
   <table class="table table-hovered">
     <thead>
       <tr>
-        <th>Station</th>
-        <th>Year</th>
-        <th>Month</th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('station_id')}" 
+            ng-click="monthsCtrl.orderBy('station_id')">
+            Station
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('station_id')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('year')}" 
+            ng-click="monthsCtrl.orderBy('year')">
+            Year
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('year')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('month')}" 
+            ng-click="monthsCtrl.orderBy('month')">
+            Month
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('month')"></i>
+        </th>
         <th>Tools</th>
-        <th>Pool Square</th>
-        <th>Pool Depth</th>
-        <th>Pool External Height</th>
-        <th>Pool Internal Height</th>
-        <th>Vapour Square</th>
-        <th>Vapour Depth</th>
-        <th>Vapour External Height</th>
-        <th>Vapour Internal Height</th>
-        <th>Vapor (3000) Square</th>
-        <th>Vapor (3000) Depth</th>
-        <th>Vapor (3000) External Height</th>
-        <th>Vapor (3000) Internal Height</th>
-        <th>Rain Gauge Square</th>
-        <th>Rain Gauge Depth</th>
-        <th>Rain Gauge External Height</th>
-        <th>Rain Gauge Internal Height</th>
-        <th>Rain Glass Number</th>
-        <th>Rain Glass Volume</th>
-        <th>Rain Glass Range</th>
-        <th>Creator</th>
-        <th>Checker</th>
-        <th>Creation_date</th>
-        <th>Head</th>
-        <th>Comments</th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_1')}" 
+            ng-click="monthsCtrl.orderBy('square_1')">
+            Pool Square
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_1')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_1')}" 
+            ng-click="monthsCtrl.orderBy('depth_1')">
+            Pool Depth
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_1')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_1')}" 
+            ng-click="monthsCtrl.orderBy('external_height_1')">
+            Pool External Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_1')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_1')}" 
+            ng-click="monthsCtrl.orderBy('internal_height_1')">
+            Pool Internal Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_1')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_2')}" 
+            ng-click="monthsCtrl.orderBy('square_2')">
+            Vapour Square
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_2')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_2')}" 
+            ng-click="monthsCtrl.orderBy('depth_2')">
+            Vapour Depth
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_2')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_2')}" 
+            ng-click="monthsCtrl.orderBy('external_height_2')">
+            Vapour External Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_2')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_2')}" 
+            ng-click="monthsCtrl.orderBy('internal_height_2')">
+            Vapour Internal Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_2')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_3')}" 
+            ng-click="monthsCtrl.orderBy('square_3')">
+            Vapor (3000) Square
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_3')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_3')}" 
+            ng-click="monthsCtrl.orderBy('depth_3')">
+            Vapor (3000) Depth
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_3')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_3')}" 
+            ng-click="monthsCtrl.orderBy('external_height_3')">
+            Vapor (3000) External Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_3')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_3')}" 
+            ng-click="monthsCtrl.orderBy('internal_height_3')">
+            Vapor (3000) Internal Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_3')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_4')}" 
+            ng-click="monthsCtrl.orderBy('square_4')">
+            Rain Gauge Square
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_4')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_4')}" 
+            ng-click="monthsCtrl.orderBy('depth_4')">
+            Rain Gauge Depth
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_4')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_4')}" 
+            ng-click="monthsCtrl.orderBy('external_height_4')">
+            Rain Gauge External Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_4')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_4')}" 
+            ng-click="monthsCtrl.orderBy('internal_height_4')">
+            Rain Gauge Internal Height
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_4')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('rg_number')}" 
+            ng-click="monthsCtrl.orderBy('rg_number')">
+            Rain Glass Number
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('rg_number')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('rg_volume')}" 
+            ng-click="monthsCtrl.orderBy('rg_volume')">
+            Rain Glass Volume
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('rg_volume')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('rg_range')}" 
+            ng-click="monthsCtrl.orderBy('rg_range')">
+            Rain Glass Range
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('rg_range')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('creator')}" 
+            ng-click="monthsCtrl.orderBy('creator')">
+            Creator
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('creator')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('checket')}" 
+            ng-click="monthsCtrl.orderBy('checket')">
+            Checker
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('checket')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('creation_date')}" 
+            ng-click="monthsCtrl.orderBy('creation_date')">
+            Creation Date
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('creation_date')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('head')}" 
+            ng-click="monthsCtrl.orderBy('head')">
+            Head
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('head')"></i>
+        </th>
+        <th ng-class="{'main-order': monthsCtrl.isOrderedBy('comments')}" 
+            ng-click="monthsCtrl.orderBy('comments')">
+            Comments
+            <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('comments')"></i>
+        </th>
         <th>Action</th>
       </tr>
     </thead>
@@ -39,95 +153,93 @@
       <tr>
         <td>
           <select class="form-control form-control-width"
-            ng-model="monthsCtrl.newMonth.station_id"
+            ng-model="monthsCtrl.filter.station_id"
             ng-options="station._id as station.name for station in monthsCtrl.stations"></select>
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.year">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.year">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.month">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.month">
+        </td>
+        <td></td>
+        <td>
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.square_1">
         </td>
         <td>
-          <button class="btn btn-default" ng-click="monthsCtrl.checkTools()">Tools</button>
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.depth_1">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_1">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.external_height_1">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_1">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.internal_height_1">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_1">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.square_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_1">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.depth_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_2">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.external_height_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_2">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.internal_height_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_2">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.square_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_2">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.depth_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_3">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.external_height_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_3">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.internal_height_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_3">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.square_4">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_3">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.depth_4">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.square_4">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.external_height_4">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.depth_4">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.internal_height_4">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.external_height_4">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.rg_number">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.internal_height_4">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.rg_volume">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.rg_number">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.rg_range">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.rg_volume">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.creator">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.rg_range">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.checker">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.creator">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.creation_date">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.checker">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.head">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.creation_date">
+          <input class="form-control form-control-width" ng-model="monthsCtrl.filter.comments">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.head">
-        </td>
-        <td>
-          <input class="form-control form-control-width" ng-model="monthsCtrl.newMonth.comments">
-        </td>
-        <td>
-          <button class="btn btn-success" ng-click="monthsCtrl.add()">Add</button>
+          <button class="btn btn-success" ng-click="monthsCtrl.clearFilter()">Clear</button>
         </td>
       </tr>
-      <tr ng-repeat="month in monthsCtrl.months">
+      <tr ng-repeat="month in monthsCtrl.months | filter:monthsCtrl.filter | orderBy:monthsCtrl.order:monthsCtrl.reverse">
         <td ng-bind="monthsCtrl.station(month.station_id)"></td>
         <td ng-bind="month.year"></td>
         <td ng-bind="month.month"></td>
@@ -161,7 +273,14 @@
         <td ng-bind="month.head"></td>
         <td ng-bind="month.comments"></td>
         <td>
-          <button class="btn btn-xs btn-danger" ng-click="monthsCtrl.delete(month)">Delete</button>
+          <div class="btn-group">
+            <button class="btn btn-xs btn-primary" ng-click="monthsCtrl.addOrEdit(month)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+            <button class="btn btn-xs btn-danger" ng-click="monthsCtrl.delete(month)">
+              <i class="glyphicon glyphicon-trash"></i>
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>

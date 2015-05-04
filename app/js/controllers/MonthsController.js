@@ -3,15 +3,16 @@
     .module('meteodata.controllers')
     .controller('MonthsController', MonthsController);
 
-  MonthsController.$inject = ['MonthsDB', '$modal', 'months', 'stations', 'tools'];
+  MonthsController.$inject = ['MonthsDB', 'Dates', '$modal', 'months', 'stations', 'tools'];
 
-  function MonthsController(MonthsDB, $modal, months, stations, tools) {
+  function MonthsController(MonthsDB, Dates, $modal, months, stations, tools) {
     var vm = this;
 
     vm.months = months;
+    vm.Dates = Dates;
     vm.stations = stations;
 
-    var newMonth = {
+    var month = {
       station_id: '',
       year: '',
       month: '',
@@ -44,7 +45,7 @@
 
     vm.isOpen = {};
 
-    vm.newMonth = angular.copy(newMonth);
+    vm.filter = angular.copy(months);
 
     vm.open = function($event, key) {
       $event.preventDefault();
@@ -53,31 +54,48 @@
       vm.isOpen[key] = true;
     }
 
-    vm.checkTools = function() {
+    vm.addOrEdit = function(existingMonth) {
+      var modalMonth = existingMonth || month;
+
       var modalInstance = $modal.open({
-        templateUrl: 'views/modals/months.tools.html',
+        templateUrl: 'views/modals/months.html',
         controller: function($modalInstance) {
           var self = this;
 
+          self.title = existingMonth ? 'Edit Monthly Report' : 'Add Monthly Report';
+
+          self.month = angular.copy(modalMonth);
+          self.stations = stations;
+          self.Dates = Dates;
           self.tools = tools;
 
-          self.selected = {};
-
           self.ok = function() {
-            $modalInstance.close(self.selected);
+            $modalInstance.close(self.month);
           };
 
           self.cancel = function() {
             $modalInstance.dismiss('cancel');
           };
         },
-        controllerAs: 'monthsToolsCtrl'
+        controllerAs: 'modalMonthsCtrl'
       });
 
-      modalInstance.result.then(function(tools) {
-        vm.newMonth.tools = tools;
+      modalInstance.result.then(function(month) {
+        if (existingMonth) {
+          MonthsDB.update({
+            id: existingMonth._id
+          }, month, function(data) {
+            for (var k in data) {
+              existingMonth[k] = data[k];
+            }
+          });
+        } else {
+          MonthsDB.add(month, function(data) {
+            vm.months.unshift(data);
+          });
+        }
       });
-    }
+    };
 
     vm.tooltip = function(month) {
       var rows = Object.keys(month.tools).reduce(function(arr, key) {

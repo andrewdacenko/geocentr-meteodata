@@ -1,0 +1,162 @@
+<div class="modal-header">
+  <h3 class="modal-title" ng-bind="modalMonthsCtrl.title"></h3>
+</div>
+
+<div class="modal-body">
+  <div class="form-group">
+    <label class="control-label">Station</label>
+    <select class="form-control form-control-width"
+      ng-model="modalMonthsCtrl.month.station_id"
+    ng-options="station._id as station.name for station in modalMonthsCtrl.stations"></select>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Year</label>
+    <select class="form-control form-control-width"
+      ng-model="modalMonthsCtrl.month.year"
+    ng-options="year as year for year in modalMonthsCtrl.Dates.years"></select>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Month</label>
+    <select class="form-control form-control-width"
+      ng-model="modalMonthsCtrl.month.month"
+    ng-options="month.index as month.name for month in modalMonthsCtrl.Dates.months"></select>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Tools</label>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Number</th>
+          <th>Check Date</th>
+          <th>Test Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="tool in modalMonthsCtrl.tools">
+          <td ng-bind="tool.name"></td>
+          <td>
+            <input type="number"
+              class="form-control"
+              ng-model="modalMonthsCtrl.month.tools[tool._id].number">
+          </td>
+          <td>
+            <input type="number"
+              class="form-control"
+              min="1"
+              max="31"
+              ng-model="modalMonthsCtrl.month.tools[tool._id].check">
+          </td>
+          <td>
+            <input type="number"
+              class="form-control"
+              min="1"
+              max="31"
+              ng-model="modalMonthsCtrl.month.tools[tool._id].test">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Pool Square</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.square_1">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Pool Depth</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.depth_1">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Pool External Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.external_height_1">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Pool Internal Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.internal_height_1">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapour Square</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.square_2">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapour Depth</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.depth_2">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapour External Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.external_height_2">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapour Internal Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.internal_height_2">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapor (3000) Square</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.square_3">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapor (3000) Depth</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.depth_3">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapor (3000) External Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.external_height_3">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Vapor (3000) Internal Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.internal_height_3">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Rain Gauge Square</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.square_4">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Rain Gauge Depth</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.depth_4">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Rain Gauge External Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.external_height_4">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Rain Gauge Internal Height</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.internal_height_4">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Rain Glass Number</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.rg_number">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Rain Glass Volume</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.rg_volume">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Rain Glass Range</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.rg_range">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Creator</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.creator">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Checker</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.checker">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Creation_date</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.creation_date">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Head</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.head">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Comments</label>
+    <input class="form-control form-control-width" ng-model="modalMonthsCtrl.month.comments">
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-success" ng-click="modalMonthsCtrl.ok()">OK</button>
+  <button class="btn btn-default" ng-click="modalMonthsCtrl.cancel()">Cancel</button>
+</div>

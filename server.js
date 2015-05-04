@@ -329,6 +329,22 @@ app.post('/months', function(req, res) {
   });
 });
 
+app.put('/months/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.months.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
+    }
+  });
+});
+
 app.delete('/months/:id', function(req, res) {
   var id = req.params.id;
   db.months.remove({
