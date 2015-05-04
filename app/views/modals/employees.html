@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h3 class="modal-title" ng-bind="modalEmployeesCtrl.title"></h3>
+</div>
+
+<div class="modal-body">
+  <div class="form-group">
+    <label class="control-label">Name</label>
+    <input class="form-control" ng-model="modalEmployeesCtrl.employee.name">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Middlename</label>
+    <input class="form-control" ng-model="modalEmployeesCtrl.employee.middlename">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Surname</label>
+    <input class="form-control" ng-model="modalEmployeesCtrl.employee.surname">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Station</label>
+    <select class="form-control"
+      ng-model="modalEmployeesCtrl.employee.station_id"
+    ng-options="station._id as station.name for station in modalEmployeesCtrl.stations"></select>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Position</label>
+    <input class="form-control" ng-model="modalEmployeesCtrl.employee.position">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Description</label>
+    <input class="form-control" ng-model="modalEmployeesCtrl.employee.description">
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-success" ng-click="modalEmployeesCtrl.ok()">OK</button>
+  <button class="btn btn-default" ng-click="modalEmployeesCtrl.cancel()">Cancel</button>
+</div>
