@@ -80,7 +80,6 @@
     }
 
     vm.tooltip = function(month) {
-      console.log(month.tools)
       var rows = Object.keys(month.tools).reduce(function(arr, key) {
         var name = tools.filter(function(t) {
           return t._id === key;

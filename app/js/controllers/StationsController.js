@@ -3,6 +3,8 @@
     .module('meteodata.controllers')
     .controller('StationsController', StationsController);
 
+  StationsController.$inject = ['StationsDB', 'stations'];
+
   function StationsController(StationsDB, stations) {
     var vm = this;
 

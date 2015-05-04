@@ -34,6 +34,7 @@
   "homepage": "https://github.com/andrewdacenko/geocentr-meteodata",
   "dependencies": {
     "bower": "^1.4.1",
+    "excel-report": "0.0.3",
     "express": "^3.20.2",
     "nedb": "^1.1.2",
     "nw": "^0.12.1"

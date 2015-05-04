@@ -21,7 +21,7 @@
 
   function stateConfig($stateProvider, $urlRouterProvider) {
     //
-    // For any unmatched url, redirect to /state1
+    // For any unmatched url, redirect to /stations
     $urlRouterProvider.otherwise("/stations");
     //
     // Now set up the states
