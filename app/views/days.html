@@ -1,34 +1,140 @@
-<h1 class="page-header">Daily Reports</h1>
+<h1 class="page-header">Daily Reports 
+  <small>
+    <a class="btn btn-xs btn-success" ng-click="daysCtrl.addOrEdit()">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
+  </small>
+</h1>
 
 <div class="table-responsive table-responsive-heightened">
   <table class="table table-hovered">
     <thead>
       <tr>
-        <th>Station</th>
-        <th>Year</th>
-        <th>Month</th>
-        <th>Day</th>
-        <th>Pool Vapour</th>
-        <th>Pool Temperaure</th>
-        <th>Pool Pressure</th>
-        <th>Evaporator (3000) Vapour</th>
-        <th>Evaporator (3000) Temperaure</th>
-        <th>Evaporator (3000) Pressure</th>
-        <th>Evaporator Vapour</th>
-        <th>Evaporator Temperaure</th>
-        <th>Evaporator Pressure</th>
-        <th>Water Temperature</th>
-        <th>Vapor Pressure</th>
-        <th>Air Temperature</th>
-        <th>Partial Pressure</th>
-        <th>Wind Speed</th>
-        <th>Soil Temperature</th>
-        <th>Falls</th>
-        <th>Pool Pressure Difference</th>
-        <th>Evapourator Pressure Difference</th>
-        <th>Evaporator (3000) Pressure Difference</th>
-        <th>Water Pressure Difference</th>
-        <th>Comment</th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('station_id')}" 
+            ng-click="daysCtrl.orderBy('station_id')">
+          Station
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('station_id')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('year')}" 
+            ng-click="daysCtrl.orderBy('year')">
+          Year
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('year')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('month')}" 
+            ng-click="daysCtrl.orderBy('month')">
+          Month
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('month')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('day')}" 
+            ng-click="daysCtrl.orderBy('day')">
+          Day
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('day')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_1')}" 
+            ng-click="daysCtrl.orderBy('vapour_1')">
+          Pool Vapour
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_1')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_1')}" 
+            ng-click="daysCtrl.orderBy('temp_1')">
+          Pool Temperaure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_1')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_1')}" 
+            ng-click="daysCtrl.orderBy('press_1')">
+          Pool Pressure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_1')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_2')}" 
+            ng-click="daysCtrl.orderBy('vapour_2')">
+          Evaporator (3000) Vapour
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_2')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_2')}" 
+            ng-click="daysCtrl.orderBy('temp_2')">
+          Evaporator (3000) Temperaure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_2')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_2')}" 
+            ng-click="daysCtrl.orderBy('press_2')">
+          Evaporator (3000) Pressure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_2')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_3')}" 
+            ng-click="daysCtrl.orderBy('vapour_3')">
+          Evaporator Vapour
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_3')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_3')}" 
+            ng-click="daysCtrl.orderBy('temp_3')">
+          Evaporator Temperaure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_3')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_3')}" 
+            ng-click="daysCtrl.orderBy('press_3')">
+          Evaporator Pressure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_3')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_w_4')}" 
+            ng-click="daysCtrl.orderBy('temp_w_4')">
+          Water Temperature
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_w_4')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_4')}" 
+            ng-click="daysCtrl.orderBy('press_4')">
+          Vapor Pressure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_4')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_a')}" 
+            ng-click="daysCtrl.orderBy('temp_a')">
+          Air Temperature
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_a')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('part_press')}" 
+            ng-click="daysCtrl.orderBy('part_press')">
+          Partial Pressure
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('part_press')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('wind')}" 
+            ng-click="daysCtrl.orderBy('wind')">
+          Wind Speed
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('wind')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('soil_temp')}" 
+            ng-click="daysCtrl.orderBy('soil_temp')">
+          Soil Temperature
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('soil_temp')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('falls')}" 
+            ng-click="daysCtrl.orderBy('falls')">
+          Falls
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('falls')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_1')}" 
+            ng-click="daysCtrl.orderBy('press_diff_1')">
+          Pool Pressure Difference
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_1')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_2')}" 
+            ng-click="daysCtrl.orderBy('press_diff_2')">
+          Evapourator Pressure Difference
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_2')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_3')}" 
+            ng-click="daysCtrl.orderBy('press_diff_3')">
+          Evaporator (3000) Pressure Difference
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_3')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_4')}" 
+            ng-click="daysCtrl.orderBy('press_diff_4')">
+          Water Pressure Difference
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_4')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('comment')}" 
+            ng-click="daysCtrl.orderBy('comment')">
+          Comment
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('comment')"></i>
+        </th>
         <th>Action</th>
       </tr>
     </thead>
@@ -36,92 +142,92 @@
       <tr>
         <td>
           <select class="form-control form-control-width"
-            ng-model="daysCtrl.newDay.station_id"
+            ng-model="daysCtrl.filter.station_id"
             ng-options="station._id as station.name for station in daysCtrl.stations"></select>
         </td>
         <td>
           <select class="form-control form-control-width" 
-            ng-model="daysCtrl.newDay.year" 
+            ng-model="daysCtrl.filter.year" 
             ng-options="year as year for year in daysCtrl.Dates.years"></select>
         </td>
         <td>
           <select class="form-control form-control-width" 
-            ng-model="daysCtrl.newDay.month" 
+            ng-model="daysCtrl.filter.month" 
             ng-options="month.index as month.name for month in daysCtrl.Dates.months"></select>
         </td>
         <td>
           <select class="form-control form-control-width" 
-            ng-model="daysCtrl.newDay.day" 
+            ng-model="daysCtrl.filter.day" 
             ng-options="day as day for day in daysCtrl.Dates.days"></select>
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.vapour_1">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.vapour_1">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_1">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_1">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_1">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_1">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.vapour_2">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.vapour_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_2">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_2">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.vapour_3">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.vapour_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_3">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_3">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_w_4">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_w_4">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_4">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_4">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.temp_a">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_a">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.part_press">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.part_press">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.wind">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.wind">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.soil_temp">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.soil_temp">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.falls">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.falls">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_1">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_diff_1">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_2">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_diff_2">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_3">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_diff_3">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.press_diff_4">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_diff_4">
         </td>
         <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.newDay.comment">
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.comment">
         </td>
         <td>
-          <button class="btn btn-success" ng-click="daysCtrl.add()">Add</button>
+          <button class="btn btn-success" ng-click="daysCtrl.clearFilter()">Clear</button>
         </td>
       </tr>
-      <tr ng-repeat="day in daysCtrl.days">
+      <tr ng-repeat="day in daysCtrl.days | filter:daysCtrl.filter | orderBy:daysCtrl.order:daysCtrl.reverse">
         <td ng-bind="daysCtrl.station(day.station_id)"></td>
         <td ng-bind="day.year"></td>
         <td ng-bind="day.month"></td>
@@ -147,7 +253,15 @@
         <td ng-bind="day.press_diff_3"></td>
         <td ng-bind="day.press_diff_4"></td>
         <td ng-bind="day.comment"></td>
-        <td><button class="btn btn-xs btn-danger" ng-click="daysCtrl.delete(day)">Delete</button></td>
+        <td>
+          <div class="btn-group">
+          <button class="btn btn-xs btn-primary" ng-click="daysCtrl.addOrEdit(day)">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </button>
+          <button class="btn btn-xs btn-danger" ng-click="daysCtrl.delete(day)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

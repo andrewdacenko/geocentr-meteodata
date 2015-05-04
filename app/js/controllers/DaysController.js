@@ -3,16 +3,18 @@
     .module('meteodata.controllers')
     .controller('DaysController', DaysController);
 
-  DaysController.$inject = ['DaysDB', 'Dates', 'days', 'stations'];
+  DaysController.$inject = ['DaysDB', 'Dates', '$modal', 'days', 'stations'];
 
-  function DaysController(DaysDB, Dates, days, stations) {
+  function DaysController(DaysDB, Dates, $modal, days, stations) {
     var vm = this;
 
     vm.Dates = Dates;
     vm.days = days;
     vm.stations = stations;
+    vm.order = '';
+    vm.reverse = false;
 
-    var newDay = {
+    var day = {
       station_id: '',
       year: '',
       month: '',
@@ -42,7 +44,7 @@
 
     vm.isOpen = {};
 
-    vm.newDay = angular.copy(newDay);
+    vm.filter = angular.copy(day);
 
     vm.open = function($event, key) {
       $event.preventDefault();
@@ -51,18 +53,69 @@
       vm.isOpen[key] = true;
     }
 
-    vm.station = function(_id) {
-      return vm.stations.filter(function(i) {
-        return i._id === _id
-      })[0].name;
+    vm.isOrderedBy = function(field) {
+      return vm.order === field;
     }
 
-    vm.add = function() {
-      var day = angular.copy(vm.newDay);
+    vm.orderBy = function(field) {
+      if (vm.order === field) {
+        vm.reverse = !vm.reverse;
+      };
 
-      DaysDB.add(day, function(data) {
-        vm.newDay = angular.copy(newDay);
-        vm.days.unshift(data);
+      vm.order = field;
+    }
+
+    vm.station = function(_id) {
+      var station = vm.stations.filter(function(i) {
+        return i._id === _id
+      });
+
+      return station.length ? station[0].name : '';
+    }
+
+    vm.clearFilter = function() {
+      vm.filter = angular.copy(day);
+      vm.reverse = false;
+      vm.order = '';
+    }
+
+    vm.addOrEdit = function(existingDay) {
+      var modalDay = existingDay || day;
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modals/days.html',
+        controller: function($modalInstance) {
+          var self = this;
+
+          self.day = angular.copy(modalDay);
+          self.stations = stations;
+          self.Dates = Dates;
+
+          self.ok = function() {
+            $modalInstance.close(self.day);
+          };
+
+          self.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        controllerAs: 'modalDaysCtrl'
+      });
+
+      modalInstance.result.then(function(day) {
+        if (existingDay) {
+          DaysDB.update({
+            id: existingDay._id
+          }, day, function(data) {
+            for (var k in data) {
+              existingDay[k] = data[k];
+            }
+          });
+        } else {
+          DaysDB.add(day, function(data) {
+            vm.days.unshift(data);
+          });
+        }
       });
     };
 

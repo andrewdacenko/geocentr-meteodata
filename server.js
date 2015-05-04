@@ -395,7 +395,10 @@ app.delete('/months/:id', function(req, res) {
 
 app.get('/days', function(req, res) {
   db.days.find({}).sort({
-    date_add: -1
+    date_add: -1,
+    year: -1,
+    month: -1,
+    day: -1
   }).exec(function(err, result) {
     res.send(result);
   });
@@ -412,6 +415,22 @@ app.post('/days', function(req, res) {
     } else {
       console.log('Success: ' + JSON.stringify(result));
       res.send(result);
+    }
+  });
+});
+
+app.put('/days/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.days.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
     }
   });
 });
