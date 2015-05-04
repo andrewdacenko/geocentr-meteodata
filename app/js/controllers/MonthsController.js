@@ -81,9 +81,10 @@
 
     vm.tooltip = function(month) {
       var rows = Object.keys(month.tools).reduce(function(arr, key) {
-        var name = tools.filter(function(t) {
+        var tool = tools.filter(function(t) {
           return t._id === key;
-        })[0].name;
+        });
+        var name = tool.length ? tool[0].name : '';
         var tool = month.tools[key];
         var row = ['<td>', [name, tool.number, tool.check, tool.test].join('</td><td>'), '</td>'].join('');
 
@@ -102,9 +103,11 @@
     }
 
     vm.station = function(_id) {
-      return vm.stations.filter(function(i) {
+      var station = vm.stations.filter(function(i) {
         return i._id === _id
-      })[0].name;
+      });
+
+      return station.length ? station[0].name : '';
     }
 
     vm.add = function() {

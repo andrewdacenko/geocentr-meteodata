@@ -43,9 +43,11 @@
     }
 
     vm.station = function(_id) {
-      return vm.stations.filter(function(i) {
+      var station = vm.stations.filter(function(i) {
         return i._id === _id
-      })[0].name;
+      });
+
+      return station.length ? station[0].name : '';
     }
 
     vm.add = function() {
