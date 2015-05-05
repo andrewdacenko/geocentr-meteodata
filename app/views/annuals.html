@@ -6,14 +6,25 @@
   </small>
 </h1>
 
-<a href="/annuals/reports">Reports</a>
-
 <div class="form-inline">
   <label>Generate report: </label>
   <div class="input-group input-group-sm" style="width:200px;">
     <input type="text" class="form-control" placeholder="2015" ng-model="year">
     <span class="input-group-btn">
-      <a ng-href="annuals/report?year={{year || 2015}}" class="btn btn-default">.xlsx</a>
+      <a ng-href="annuals/report?year={{year || 2015}}" class="btn btn-default">Only year</a>
+    </span>
+  </div>
+
+  <label>Start month: </label>
+  <div class="input-group input-group-sm" style="width:200px;">
+    <input type="text" class="form-control" placeholder="2" ng-model="start">
+  </div>
+
+  <label>Start month: </label>
+  <div class="input-group input-group-sm" style="width:200px;">
+    <input type="text" class="form-control" placeholder="8" ng-model="end">
+    <span class="input-group-btn">
+      <a ng-href="annuals/day?year={{year || 2015}}&start={{start || 2}}&end={{end || 8}}" class="btn btn-default">Go</a>
     </span>
   </div>
 </div>

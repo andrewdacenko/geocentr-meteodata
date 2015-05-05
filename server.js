@@ -170,9 +170,9 @@ app.get('/annuals', function(req, res) {
 });
 
 app.get('/annuals/day', function(req, res) {
-  var year = req.query.year || 2015;
-  var start = req.query.start || 4;
-  var end = req.query.end || 5;
+  var year = +req.query.year || 2015;
+  var start = +req.query.start || 4;
+  var end = +req.query.end || 5;
   async.waterfall([
 
     function findAnnual(callback) {
