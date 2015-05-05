@@ -129,6 +129,22 @@ app.post('/stations', function(req, res) {
   });
 });
 
+app.put('/stations/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.stations.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
+    }
+  });
+});
+
 app.delete('/stations/:id', function(req, res) {
   var id = req.params.id;
   db.stations.remove({
