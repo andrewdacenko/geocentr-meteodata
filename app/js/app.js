@@ -27,9 +27,8 @@
     .config(stateConfig)
     .controller('WindowToolbar', WindowToolbar)
     .factory('Window', function() {
-      //var gui = require('nw.gui');
-      //return gui.Window.get()
-      return {};
+      var gui = require('nw.gui');
+      return gui.Window.get();
     })
 
 

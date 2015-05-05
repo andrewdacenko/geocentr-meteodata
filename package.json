@@ -1,43 +1,85 @@
 {
-  "name": "geocentr",
-  "version": "1.0.0",
-  "description": "Geocentr meteodata node-webkit app",
-  "main": "index.html",
-  "window": {
-    "toolbar": false,
-    "width": 800,
-    "height": 600,
-    "frame": true,
-    "position": "center",
-    "fullscreen": true,
-    "resizable": true
-  },
-  "node-remote": "<local>",
-  "scripts": {
-    "prestart": "npm install",
-    "start": "node ./node_modules/nw/bin/nw",
-    "install": "node ./node_modules/bower/bin/bower install",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andrewdacenko/geocentr-meteodata.git"
-  },
-  "author": "Andrew Dacenko <a.s.dvronik@gmail.com>",
-  "contributors": [
-    "Alex Nycheporuk <nycheporuk@gmail.com>"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/andrewdacenko/geocentr-meteodata/issues"
-  },
-  "homepage": "https://github.com/andrewdacenko/geocentr-meteodata",
-  "dependencies": {
-    "async": "^0.9.0",
-    "bower": "^1.4.1",
-    "excel-report": "0.0.3",
-    "express": "^3.20.2",
-    "nedb": "^1.1.2",
-    "nw": "^0.12.1"
-  }
+    "app_name": "geocentr-meteodata", 
+    "contributors": [
+        "Alex Nycheporuk <nycheporuk@gmail.com>"
+    ], 
+    "nodejs": true, 
+    "additional_trust_anchors": "", 
+    "inject-js-end": "", 
+    "node-remote": "<local>", 
+    "keywords": [], 
+    "author": "Andrew Dacenko <a.s.dvronik@gmail.com>", 
+    "user-agent": "", 
+    "window": {
+        "fullscreen": true, 
+        "kiosk_emulation": false, 
+        "resizable": true, 
+        "show": true, 
+        "always-on-top": false, 
+        "kiosk": false, 
+        "frame": true, 
+        "title": "geocentr-meteodata", 
+        "visible": true, 
+        "height": 600, 
+        "exe_icon": "", 
+        "width": 800, 
+        "as_desktop": false, 
+        "position": "center", 
+        "show_in_taskbar": true, 
+        "mac_icon": "", 
+        "transparent": false, 
+        "toolbar": false, 
+        "icon": ""
+    }, 
+    "version": "1.0.0", 
+    "inject-js-start": "", 
+    "main": "index.html", 
+    "homepage": "https://github.com/andrewdacenko/geocentr-meteodata", 
+    "chromium-args": "", 
+    "webexe_settings": {
+        "linux-x32": false, 
+        "export_dir": "output", 
+        "windows-x64": true, 
+        "download_dir": "C:\\\\Users\\\\Andriy_Dacenko\\\\Downloads\\\\Web2ExeWin\\\\files\\\\downloads", 
+        "nw_compression_level": 0, 
+        "mac-x32": false, 
+        "windows-x32": true, 
+        "mac-x64": false, 
+        "nw_version": "0.12.1", 
+        "force_download": false, 
+        "linux-x64": false
+    }, 
+    "description": "Geocentr meteodata node-webkit app", 
+    "repository": {
+        "url": "https://github.com/andrewdacenko/geocentr-meteodata.git", 
+        "type": "git"
+    }, 
+    "dependencies": {
+        "excel-report": "0.0.3", 
+        "express": "^3.20.2", 
+        "bower": "^1.4.1", 
+        "async": "^0.9.0", 
+        "nedb": "^1.1.2", 
+        "nw": "^0.12.1"
+    }, 
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1", 
+        "prestart": "npm install", 
+        "install": "node ./node_modules/bower/bin/bower install", 
+        "start": "node ./node_modules/nw/bin/nw"
+    }, 
+    "webkit": {
+        "page-cache": false, 
+        "java": false, 
+        "plugin": false
+    }, 
+    "js-flags": "", 
+    "name": "geocentr", 
+    "license": "MIT", 
+    "bugs": {
+        "url": "https://github.com/andrewdacenko/geocentr-meteodata/issues"
+    }, 
+    "single-instance": true, 
+    "snapshot": "", 
+    "node-main": ""
 }
