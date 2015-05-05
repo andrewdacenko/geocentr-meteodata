@@ -74,6 +74,22 @@ app.post('/employees', function(req, res) {
   });
 });
 
+app.put('/employees/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.employees.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
+    }
+  });
+});
+
 app.delete('/employees/:id', function(req, res) {
   var id = req.params.id;
   db.employees.remove({
@@ -109,6 +125,22 @@ app.post('/stations', function(req, res) {
     } else {
       console.log('Success: ' + JSON.stringify(result));
       res.send(result);
+    }
+  });
+});
+
+app.put('/stations/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.stations.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
     }
   });
 });
@@ -338,6 +370,22 @@ app.post('/annuals', function(req, res) {
   });
 });
 
+app.put('/annuals/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.annuals.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
+    }
+  });
+});
+
 app.delete('/annuals/:id', function(req, res) {
   var id = req.params.id;
   db.annuals.remove({
@@ -377,6 +425,22 @@ app.post('/tools', function(req, res) {
   });
 });
 
+app.put('/tools/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.tools.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
+    }
+  });
+});
+
 app.delete('/tools/:id', function(req, res) {
   var id = req.params.id;
   db.tools.remove({
@@ -412,6 +476,22 @@ app.post('/months', function(req, res) {
     } else {
       console.log('Success: ' + JSON.stringify(result));
       res.send(result);
+    }
+  });
+});
+
+app.put('/months/:id', function(req, res) {
+  var id = req.params.id;
+
+  db.months.update({
+    _id: id
+  }, req.body, {}, function(err, numReplaced) {
+    if (err) {
+      res.send({
+        'error': 'An error has occurred - ' + err
+      });
+    } else {
+      res.send(req.body);
     }
   });
 });

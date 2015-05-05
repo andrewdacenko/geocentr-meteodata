@@ -3,15 +3,17 @@
     .module('meteodata.controllers')
     .controller('EmployeesController', EmployeesController);
 
-  EmployeesController.$inject = ['EmployeesDB', 'employees', 'stations'];
+  EmployeesController.$inject = ['EmployeesDB', '$modal', 'employees', 'stations'];
 
-  function EmployeesController(EmployeesDB, employees, stations) {
+  function EmployeesController(EmployeesDB, $modal, employees, stations) {
     var vm = this;
 
     vm.employees = employees;
     vm.stations = stations;
+    vm.order = '';
+    vm.reverse = false;
 
-    var newEmployee = {
+    var employee = {
       name: '',
       surname: '',
       station_id: '',
@@ -20,7 +22,19 @@
       description: ''
     }
 
-    vm.newEmployee = angular.copy(newEmployee);
+    vm.filter = angular.copy(employee);
+
+    vm.isOrderedBy = function(field) {
+      return vm.order === field;
+    }
+
+    vm.orderBy = function(field) {
+      if (vm.order === field) {
+        vm.reverse = !vm.reverse;
+      };
+
+      vm.order = field;
+    }
 
     vm.station = function(_id) {
       var station = vm.stations.filter(function(i) {
@@ -30,12 +44,50 @@
       return station.length ? station[0].name : '';
     }
 
-    vm.add = function() {
-      var employee = angular.copy(vm.newEmployee);
+    vm.clearFilter = function() {
+      vm.filter = angular.copy(employee);
+      vm.reverse = false;
+      vm.order = '';
+    }
 
-      EmployeesDB.add(employee, function(data) {
-        vm.newEmployee = angular.copy(newEmployee);
-        vm.employees.unshift(data);
+    vm.addOrEdit = function(existingEmployee) {
+      var modalEmployee = existingEmployee || employee;
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modals/employees.html',
+        controller: function($modalInstance) {
+          var self = this;
+
+          self.title = existingEmployee ? 'Edit Employee' : 'Add Employee';
+
+          self.employee = angular.copy(modalEmployee);
+          self.stations = stations;
+
+          self.ok = function() {
+            $modalInstance.close(self.employee);
+          };
+
+          self.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        controllerAs: 'modalEmployeesCtrl'
+      });
+
+      modalInstance.result.then(function(employee) {
+        if (existingEmployee) {
+          EmployeesDB.update({
+            id: existingEmployee._id
+          }, employee, function(data) {
+            for (var k in data) {
+              existingEmployee[k] = data[k];
+            }
+          });
+        } else {
+          EmployeesDB.add(employee, function(data) {
+            vm.employees.unshift(data);
+          });
+        }
       });
     };
 

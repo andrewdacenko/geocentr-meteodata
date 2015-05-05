@@ -1,54 +1,96 @@
-<h1 class="page-header">Stations</h1>
+<h1 class="page-header">Stations
+  <small>
+    <a class="btn btn-xs btn-success" ng-click="stationsCtrl.addOrEdit()">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
+  </small>
+</h1>
 
 <table class="table table-hovered">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Coordinates</th>
-      <th>Region</th>
-      <th>District</th>
-      <th>City</th>
-      <th>Index</th>
-      <th>Height</th>
-      <th>Open</th>
-      <th>Close</th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('name')}" 
+          ng-click="stationsCtrl.orderBy('name')">
+          Name
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('name')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('coordinates')}" 
+          ng-click="stationsCtrl.orderBy('coordinates')">
+          Coordinates
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('coordinates')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('region')}" 
+          ng-click="stationsCtrl.orderBy('region')">
+          Region
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('region')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('district')}" 
+          ng-click="stationsCtrl.orderBy('district')">
+          District
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('district')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('city')}" 
+          ng-click="stationsCtrl.orderBy('city')">
+          City
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('city')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('index')}" 
+          ng-click="stationsCtrl.orderBy('index')">
+          Index
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('index')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('height')}" 
+          ng-click="stationsCtrl.orderBy('height')">
+          Height
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('height')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('open')}" 
+          ng-click="stationsCtrl.orderBy('open')">
+          Open
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('open')"></i>
+      </th>
+      <th ng-class="{'main-order': stationsCtrl.isOrderedBy('close')}" 
+          ng-click="stationsCtrl.orderBy('close')">
+          Close
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('close')"></i>
+      </th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.name">
+        <input class="form-control" ng-model="stationsCtrl.filter.name">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.coordinates">
+        <input class="form-control" ng-model="stationsCtrl.filter.coordinates">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.region">
+        <input class="form-control" ng-model="stationsCtrl.filter.region">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.district">
+        <input class="form-control" ng-model="stationsCtrl.filter.district">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.city">
+        <input class="form-control" ng-model="stationsCtrl.filter.city">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.index">
+        <input class="form-control" ng-model="stationsCtrl.filter.index">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.height">
+        <input class="form-control" ng-model="stationsCtrl.filter.height">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.open">
+        <input class="form-control" ng-model="stationsCtrl.filter.open">
       </td>
       <td>
-        <input class="form-control" ng-model="stationsCtrl.newStation.close">
+        <input class="form-control" ng-model="stationsCtrl.filter.close">
       </td>
       <td>
-        <button class="btn btn-success" ng-click="stationsCtrl.add()">Add</button>
+        <button class="btn btn-success" ng-click="stationsCtrl.clearFilter()">Clear</button>
       </td>
     </tr>
-    <tr ng-repeat="station in stationsCtrl.stations">
+    <tr ng-repeat="station in stationsCtrl.stations | filter:stationsCtrl.filter | orderBy:stationsCtrl.order:stationsCtrl.reverse">
       <td ng-bind="station.name"></td>
       <td ng-bind="station.coordinates"></td>
       <td ng-bind="station.region"></td>
@@ -59,7 +101,14 @@
       <td ng-bind="station.open"></td>
       <td ng-bind="station.close"></td>
       <td>
-        <button class="btn btn-xs btn-danger" ng-click="stationsCtrl.delete(station)">Delete</button>
+        <div class="btn-group">
+          <button class="btn btn-xs btn-primary" ng-click="stationsCtrl.addOrEdit(station)">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </button>
+          <button class="btn btn-xs btn-danger" ng-click="stationsCtrl.delete(station)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </button>
+        </div>
       </td>
     </tr>
   </tbody>

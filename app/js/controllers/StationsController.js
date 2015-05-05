@@ -3,14 +3,14 @@
     .module('meteodata.controllers')
     .controller('StationsController', StationsController);
 
-  StationsController.$inject = ['StationsDB', 'stations'];
+  StationsController.$inject = ['StationsDB', '$modal', 'stations'];
 
-  function StationsController(StationsDB, stations) {
+  function StationsController(StationsDB, $modal, stations) {
     var vm = this;
 
     vm.stations = stations;
 
-    var newStation = {
+    var station = {
       name: '',
       coordinates: '',
       region: '',
@@ -22,14 +22,71 @@
       close: ''
     };
 
-    vm.newStation = angular.copy(newStation);
+    vm.filter = angular.copy(station);
 
-    vm.add = function() {
-      var input = angular.copy(vm.newStation);
+    vm.isOrderedBy = function(field) {
+      return vm.order === field;
+    }
 
-      StationsDB.add(input, function(data) {
-        vm.newStation = angular.copy(newStation);
-        vm.stations.unshift(data);
+    vm.orderBy = function(field) {
+      if (vm.order === field) {
+        vm.reverse = !vm.reverse;
+      };
+
+      vm.order = field;
+    }
+
+    vm.station = function(_id) {
+      var station = vm.stations.filter(function(i) {
+        return i._id === _id
+      });
+
+      return station.length ? station[0].name : '';
+    }
+
+    vm.clearFilter = function() {
+      vm.filter = angular.copy(station);
+      vm.reverse = false;
+      vm.order = '';
+    }
+
+    vm.addOrEdit = function(existingStation) {
+      var modalStation = existingStation || station;
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modals/stations.html',
+        controller: function($modalInstance) {
+          var self = this;
+
+          self.title = existingStation ? 'Edit Station' : 'Add Station';
+
+          self.station = angular.copy(modalStation);
+
+          self.ok = function() {
+            $modalInstance.close(self.station);
+          };
+
+          self.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        controllerAs: 'modalStationsCtrl'
+      });
+
+      modalInstance.result.then(function(station) {
+        if (existingStation) {
+          StationsDB.update({
+            id: existingStation._id
+          }, station, function(data) {
+            for (var k in data) {
+              existingStation[k] = data[k];
+            }
+          });
+        } else {
+          StationsDB.add(station, function(data) {
+            vm.stations.unshift(data);
+          });
+        }
       });
     };
 

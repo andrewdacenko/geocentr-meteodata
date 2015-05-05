@@ -1,0 +1,159 @@
+<div class="modal-header">
+  <h3 class="modal-title" ng-bind="modalAnnualsCtrl.title"></h3>
+</div>
+
+<div class="modal-body">
+  <div class="form-group">
+    <label class="control-label">Station</label>
+    <select class="form-control form-control-width"
+      ng-model="modalAnnualsCtrl.annual.station_id"
+    ng-options="station._id as station.name for station in modalAnnualsCtrl.stations"></select>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Year</label>
+    <select class="form-control form-control-width"
+      ng-model="modalAnnualsCtrl.annual.year"
+    ng-options="year as year for year in modalAnnualsCtrl.Dates.years"></select>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Number</label>
+    <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.number">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Angle Continental</label>
+    <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.angle_continental">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Angle Shore</label>
+    <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.angle_shore">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Station Page</label>
+    <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.page_station">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Observation Page</label>
+    <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.page_observation">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Comment</label>
+    <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.comment">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Snow Melting</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.snow_melting"
+      is-open="modalAnnualsCtrl.isOpen.snow_melting">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'snow_melting')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Ground Observation Begin</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.observation_begin_g"
+      is-open="modalAnnualsCtrl.isOpen.observation_begin_g">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'observation_begin_g')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Ground Observation End</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.observation_end_g"
+      is-open="modalAnnualsCtrl.isOpen.observation_end_g">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'observation_end_g')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Water Freezing</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.water_freezing"
+      is-open="modalAnnualsCtrl.isOpen.water_freezing">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'water_freezing')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Ice Clean</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.ice_clean"
+      is-open="modalAnnualsCtrl.isOpen.ice_clean">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'ice_clean')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Water Observation Begin</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.observation_begin_w"
+      is-open="modalAnnualsCtrl.isOpen.observation_begin_w">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'observation_begin_w')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Water Observation End</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.observation_end_w"
+      is-open="modalAnnualsCtrl.isOpen.observation_end_w">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'observation_end_w')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Ice Cover</label>
+    <p class="input-group">
+      <input class="form-control form-control-width"
+      datepicker-popup
+      ng-model="modalAnnualsCtrl.annual.ice_cover"
+      is-open="modalAnnualsCtrl.isOpen.ice_cover">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="modalAnnualsCtrl.open($event, 'ice_cover')">
+        <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-success" ng-click="modalAnnualsCtrl.ok()">OK</button>
+  <button class="btn btn-default" ng-click="modalAnnualsCtrl.cancel()">Cancel</button>
+</div>

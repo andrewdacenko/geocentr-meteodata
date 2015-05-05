@@ -1,51 +1,90 @@
-<h1 class="page-header">Employees</h1>
+<h1 class="page-header">Employees
+  <small>
+    <a class="btn btn-xs btn-success" ng-click="employeesCtrl.addOrEdit()">
+      <i class="glyphicon glyphicon-plus"></i>
+    </a>
+  </small>
+</h1>
 
 <table class="table table-hovered">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Middlename</th>
-      <th>Surname</th>
-      <th>Station</th>
-      <th>Position</th>
-      <th>Description</th>
+      <th ng-class="{'main-order': employeesCtrl.isOrderedBy('name')}" 
+          ng-click="employeesCtrl.orderBy('name')">
+          Name
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!employeesCtrl.reverse, 'glyphicon-menu-up': !employeesCtrl.reverse}" ng-if="employeesCtrl.isOrderedBy('name')"></i>
+      </th>
+      <th ng-class="{'main-order': employeesCtrl.isOrderedBy('middlename')}" 
+          ng-click="employeesCtrl.orderBy('middlename')">
+          Middlename
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!employeesCtrl.reverse, 'glyphicon-menu-up': !employeesCtrl.reverse}" ng-if="employeesCtrl.isOrderedBy('middlename')"></i>
+      </th>
+      <th ng-class="{'main-order': employeesCtrl.isOrderedBy('surname')}" 
+          ng-click="employeesCtrl.orderBy('surname')">
+          Surname
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!employeesCtrl.reverse, 'glyphicon-menu-up': !employeesCtrl.reverse}" ng-if="employeesCtrl.isOrderedBy('surname')"></i>
+      </th>
+      <th ng-class="{'main-order': employeesCtrl.isOrderedBy('station_id')}" 
+          ng-click="employeesCtrl.orderBy('station_id')">
+          Station
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!employeesCtrl.reverse, 'glyphicon-menu-up': !employeesCtrl.reverse}" ng-if="employeesCtrl.isOrderedBy('station_id')"></i>
+      </th>
+      <th ng-class="{'main-order': employeesCtrl.isOrderedBy('position')}" 
+          ng-click="employeesCtrl.orderBy('position')">
+          Position
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!employeesCtrl.reverse, 'glyphicon-menu-up': !employeesCtrl.reverse}" ng-if="employeesCtrl.isOrderedBy('position')"></i>
+      </th>
+      <th ng-class="{'main-order': employeesCtrl.isOrderedBy('description')}" 
+          ng-click="employeesCtrl.orderBy('description')">
+          Description
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!employeesCtrl.reverse, 'glyphicon-menu-up': !employeesCtrl.reverse}" ng-if="employeesCtrl.isOrderedBy('description')"></i>
+      </th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <input class="form-control" ng-model="employeesCtrl.newEmployee.name">
+        <input class="form-control" ng-model="employeesCtrl.filter.name">
       </td>
       <td>
-        <input class="form-control" ng-model="employeesCtrl.newEmployee.middlename">
+        <input class="form-control" ng-model="employeesCtrl.filter.middlename">
       </td>
       <td>
-        <input class="form-control" ng-model="employeesCtrl.newEmployee.surname">
+        <input class="form-control" ng-model="employeesCtrl.filter.surname">
       </td>
       <td>
         <select class="form-control" 
-          ng-model="employeesCtrl.newEmployee.station_id" 
+          ng-model="employeesCtrl.filter.station_id" 
           ng-options="station._id as station.name for station in employeesCtrl.stations"></select>
       </td>
       <td>
-        <input class="form-control" ng-model="employeesCtrl.newEmployee.position">
+        <input class="form-control" ng-model="employeesCtrl.filter.position">
       </td>
       <td>
-        <input class="form-control" ng-model="employeesCtrl.newEmployee.description">
+        <input class="form-control" ng-model="employeesCtrl.filter.description">
       </td>
       <td>
-        <button class="btn btn-success" ng-click="employeesCtrl.add()">Add</button>
+        <button class="btn btn-success" ng-click="employeesCtrl.clearFilter()">Clear</button>
       </td>
     </tr>
-    <tr ng-repeat="employee in employeesCtrl.employees">
+    <tr ng-repeat="employee in employeesCtrl.employees | filter:employeesCtrl.filter | orderBy:employeesCtrl.order:employeesCtrl.reverse">
       <td ng-bind="employee.name"></td>
       <td ng-bind="employee.middlename"></td>
       <td ng-bind="employee.surname"></td>
       <td ng-bind="employeesCtrl.station(employee.station_id)"></td>
       <td ng-bind="employee.position"></td>
       <td ng-bind="employee.description"></td>
-      <td><button class="btn btn-xs btn-danger" ng-click="employeesCtrl.delete(employee)">Delete</button></td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-xs btn-primary" ng-click="employeesCtrl.addOrEdit(employee)">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </button>
+          <button class="btn btn-xs btn-danger" ng-click="employeesCtrl.delete(employee)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </button>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
