@@ -13,27 +13,27 @@ var
 
 var db = {
   employees: new nedb({
-    filename: employeesDB,
+    filename: path.join(global.appData, employeesDB),
     autoload: true
   }),
   stations: new nedb({
-    filename: stationsDB,
+    filename: path.join(global.appData, stationsDB),
     autoload: true
   }),
   annuals: new nedb({
-    filename: annualsDB,
+    filename: path.join(global.appData, annualsDB),
     autoload: true
   }),
   tools: new nedb({
-    filename: toolsDB,
+    filename: path.join(global.appData, toolsDB),
     autoload: true
   }),
   days: new nedb({
-    filename: daysDB,
+    filename: path.join(global.appData, daysDB),
     autoload: true
   }),
   months: new nedb({
-    filename: monthsDB,
+    filename: path.join(global.appData, monthsDB),
     autoload: true
   })
 };
