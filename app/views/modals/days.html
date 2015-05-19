@@ -4,116 +4,116 @@
 
 <div class="modal-body">
   <div class="form-group">
-    <label class="control-label">Station</label>
+    <label class="control-label">Станція</label>
     <select class="form-control form-control-width"
       ng-model="modalDaysCtrl.day.station_id"
     ng-options="station._id as station.name for station in modalDaysCtrl.stations"></select>
   </div>
   <div class="form-group">
-    <label class="control-label">Year</label>
+    <label class="control-label">Рік</label>
     <select class="form-control form-control-width"
       ng-model="modalDaysCtrl.day.year"
     ng-options="year as year for year in modalDaysCtrl.Dates.years"></select>
   </div>
   <div class="form-group">
-    <label class="control-label">Month</label>
+    <label class="control-label">Місяць</label>
     <select class="form-control form-control-width"
       ng-model="modalDaysCtrl.day.month"
     ng-options="month.index as month.name for month in modalDaysCtrl.Dates.months"></select>
   </div>
   <div class="form-group">
-    <label class="control-label">Day</label>
+    <label class="control-label">День</label>
     <select class="form-control form-control-width"
       ng-model="modalDaysCtrl.day.day"
     ng-options="day as day for day in modalDaysCtrl.Dates.days"></select>
   </div>
   <div class="form-group">
-    <label class="control-label">Pool Vapour</label>
+    <label class="control-label">Басейн: випаровування, мм/доб</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.vapour_1">
   </div>
   <div class="form-group">
-    <label class="control-label">Pool Temperaure</label>
+    <label class="control-label">Температура, °C</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.temp_1">
   </div>
   <div class="form-group">
-    <label class="control-label">Pool Pressure</label>
+    <label class="control-label">Тиск насиченної пари, гПа</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_1">
   </div>
   <div class="form-group">
-    <label class="control-label">Evaporator (3000) Vapour</label>
+    <label class="control-label">Випарник(3000): випаровування, мм/доб</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.vapour_2">
   </div>
   <div class="form-group">
-    <label class="control-label">Evaporator (3000) Temperaure</label>
+    <label class="control-label">Температура, °C</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.temp_2">
   </div>
   <div class="form-group">
-    <label class="control-label">Evaporator (3000) Pressure</label>
+    <label class="control-label">Тиск насиченної пари, гПа</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_2">
   </div>
   <div class="form-group">
-    <label class="control-label">Evaporator Vapour</label>
+    <label class="control-label">Випарник: випаровування, мм/доб</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.vapour_3">
   </div>
   <div class="form-group">
-    <label class="control-label">Evaporator Temperaure</label>
+    <label class="control-label">Температура, °C</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.temp_3">
   </div>
   <div class="form-group">
-    <label class="control-label">Evaporator Pressure</label>
+    <label class="control-label">Тиск насиченної пари, гПа</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_3">
   </div>
   <div class="form-group">
-    <label class="control-label">Water Temperature</label>
+    <label class="control-label">Водойма: температура, °C</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.temp_w_4">
   </div>
   <div class="form-group">
-    <label class="control-label">Vapor Pressure</label>
+    <label class="control-label">Водойма: тиск насиченної пари, гПа</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_4">
   </div>
   <div class="form-group">
-    <label class="control-label">Air Temperature</label>
+    <label class="control-label">Температура повітря, °C</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.temp_a">
   </div>
   <div class="form-group">
-    <label class="control-label">Partial Pressure</label>
+    <label class="control-label">Парціальний тиск пари, гПа</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.part_press">
   </div>
   <div class="form-group">
-    <label class="control-label">Wind Speed</label>
+    <label class="control-label">Швидкість вітру, м/с</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.wind">
   </div>
   <div class="form-group">
-    <label class="control-label">Soil Temperature</label>
+    <label class="control-label">Температура грунту на глибині 20 см, °C</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.soil_temp">
   </div>
   <div class="form-group">
-    <label class="control-label">Falls</label>
+    <label class="control-label">Опади за добу, мм</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.falls">
   </div>
   <div class="form-group">
-    <label class="control-label">Pool Pressure Difference</label>
+    <label class="control-label">Різниця тиску вод. пари. Басейн</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_diff_1">
   </div>
   <div class="form-group">
-    <label class="control-label">Evapourator Pressure Difference</label>
+    <label class="control-label">Різниця тиску вод. пари. Випарник</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_diff_2">
   </div>
   <div class="form-group">
-    <label class="control-label">Evaporator (3000) Pressure Difference</label>
+    <label class="control-label">Різниця тиску вод. пари. Випарник(3000)</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_diff_3">
   </div>
   <div class="form-group">
-    <label class="control-label">Water Pressure Difference</label>
+    <label class="control-label">Різниця тиску вод. пари. Водойма</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.press_diff_4">
   </div>
   <div class="form-group">
-    <label class="control-label">Comment</label>
+    <label class="control-label">Примітка</label>
     <input class="form-control form-control-width" ng-model="modalDaysCtrl.day.comment">
   </div>
 </div>
 
 <div class="modal-footer">
   <button class="btn btn-success" ng-click="modalDaysCtrl.ok()">OK</button>
-  <button class="btn btn-default" ng-click="modalDaysCtrl.cancel()">Cancel</button>
+  <button class="btn btn-default" ng-click="modalDaysCtrl.cancel()">Відмінити</button>
 </div>

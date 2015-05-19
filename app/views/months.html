@@ -1,4 +1,4 @@
-<h1 class="page-header">Montly Reports
+<h1 class="page-header">Щомісячний звіт
   <small>
     <a class="btn btn-xs btn-success" ng-click="monthsCtrl.addOrEdit()">
       <i class="glyphicon glyphicon-plus"></i>
@@ -12,141 +12,141 @@
       <tr>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('station_id')}" 
             ng-click="monthsCtrl.orderBy('station_id')">
-            Station
+            Станція
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('station_id')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('year')}" 
             ng-click="monthsCtrl.orderBy('year')">
-            Year
+            Рік
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('year')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('month')}" 
             ng-click="monthsCtrl.orderBy('month')">
-            Month
+            Місяць
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('month')"></i>
         </th>
-        <th>Tools</th>
+        <th>Інструменти</th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_1')}" 
             ng-click="monthsCtrl.orderBy('square_1')">
-            Pool Square
+            Площа басейну, кв.м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_1')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_1')}" 
             ng-click="monthsCtrl.orderBy('depth_1')">
-            Pool Depth
+            Глибина басейну, м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_1')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_1')}" 
             ng-click="monthsCtrl.orderBy('external_height_1')">
-            Pool External Height
+            Висота зовні, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_1')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_1')}" 
             ng-click="monthsCtrl.orderBy('internal_height_1')">
-            Pool Internal Height
+            Висота усередині, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_1')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_2')}" 
             ng-click="monthsCtrl.orderBy('square_2')">
-            Vapour Square
+            Площа випарника, кв.м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_2')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_2')}" 
             ng-click="monthsCtrl.orderBy('depth_2')">
-            Vapour Depth
+            Глибина випарника, м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_2')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_2')}" 
             ng-click="monthsCtrl.orderBy('external_height_2')">
-            Vapour External Height
+            Висота зовні, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_2')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_2')}" 
             ng-click="monthsCtrl.orderBy('internal_height_2')">
-            Vapour Internal Height
+            Висота усередині, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_2')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_3')}" 
             ng-click="monthsCtrl.orderBy('square_3')">
-            Vapor (3000) Square
+            Площа випарника(3000), кв.м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_3')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_3')}" 
             ng-click="monthsCtrl.orderBy('depth_3')">
-            Vapor (3000) Depth
+            Глибина випарника(3000), м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_3')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_3')}" 
             ng-click="monthsCtrl.orderBy('external_height_3')">
-            Vapor (3000) External Height
+            Висота зовні, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_3')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_3')}" 
             ng-click="monthsCtrl.orderBy('internal_height_3')">
-            Vapor (3000) Internal Height
+            Висота усередині, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_3')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('square_4')}" 
             ng-click="monthsCtrl.orderBy('square_4')">
-            Rain Gauge Square
+            Площа дощоміра, кв.м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('square_4')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('depth_4')}" 
             ng-click="monthsCtrl.orderBy('depth_4')">
-            Rain Gauge Depth
+            Глибина дощоміра, м
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('depth_4')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('external_height_4')}" 
             ng-click="monthsCtrl.orderBy('external_height_4')">
-            Rain Gauge External Height
+            Висота зовні, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('external_height_4')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('internal_height_4')}" 
             ng-click="monthsCtrl.orderBy('internal_height_4')">
-            Rain Gauge Internal Height
+            Висота усередині, см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('internal_height_4')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('rg_number')}" 
             ng-click="monthsCtrl.orderBy('rg_number')">
-            Rain Glass Number
+            Дощомірна склянка, №
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('rg_number')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('rg_volume')}" 
             ng-click="monthsCtrl.orderBy('rg_volume')">
-            Rain Glass Volume
+            Об'єм, куб.см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('rg_volume')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('rg_range')}" 
             ng-click="monthsCtrl.orderBy('rg_range')">
-            Rain Glass Range
+            Ціна 1 поділки, куб. см
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('rg_range')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('creator')}" 
             ng-click="monthsCtrl.orderBy('creator')">
-            Creator
+            Таблицю склав
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('creator')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('checket')}" 
             ng-click="monthsCtrl.orderBy('checket')">
-            Checker
+            Таблицю перевірив
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('checket')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('creation_date')}" 
             ng-click="monthsCtrl.orderBy('creation_date')">
-            Creation Date
+            Дата відправлення до ЦГО
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('creation_date')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('head')}" 
             ng-click="monthsCtrl.orderBy('head')">
-            Head
+            Начальник станції
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('head')"></i>
         </th>
         <th ng-class="{'main-order': monthsCtrl.isOrderedBy('comments')}" 
             ng-click="monthsCtrl.orderBy('comments')">
-            Comments
+            Зауваження ЦГО
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!monthsCtrl.reverse, 'glyphicon-menu-up': !monthsCtrl.reverse}" ng-if="monthsCtrl.isOrderedBy('comments')"></i>
         </th>
-        <th>Action</th>
+        <th>Дія</th>
       </tr>
     </thead>
     <tbody>
@@ -240,7 +240,7 @@
           <input class="form-control form-control-width" ng-model="monthsCtrl.filter.comments">
         </td>
         <td>
-          <button class="btn btn-success" ng-click="monthsCtrl.clearFilter()">Clear</button>
+          <button class="btn btn-success" ng-click="monthsCtrl.clearFilter()">Очистити</button>
         </td>
       </tr>
       <tr ng-repeat="month in monthsCtrl.months | filter:monthsCtrl.filter | orderBy:monthsCtrl.order:monthsCtrl.reverse">

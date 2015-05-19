@@ -4,43 +4,43 @@
 
 <div class="modal-body">
   <div class="form-group">
-    <label class="control-label">Station</label>
+    <label class="control-label">Станція</label>
     <select class="form-control form-control-width"
       ng-model="modalAnnualsCtrl.annual.station_id"
     ng-options="station._id as station.name for station in modalAnnualsCtrl.stations"></select>
   </div>
   <div class="form-group">
-    <label class="control-label">Year</label>
+    <label class="control-label">Рік</label>
     <select class="form-control form-control-width"
       ng-model="modalAnnualsCtrl.annual.year"
     ng-options="year as year for year in modalAnnualsCtrl.Dates.years"></select>
   </div>
   <div class="form-group">
-    <label class="control-label">Number</label>
+    <label class="control-label">Порядковий №</label>
     <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.number">
   </div>
   <div class="form-group">
-    <label class="control-label">Angle Continental</label>
+    <label class="control-label">Континентальний кут</label>
     <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.angle_continental">
   </div>
   <div class="form-group">
-    <label class="control-label">Angle Shore</label>
+    <label class="control-label">Береговий кут</label>
     <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.angle_shore">
   </div>
   <div class="form-group">
-    <label class="control-label">Station Page</label>
+    <label class="control-label">Сторінка станції</label>
     <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.page_station">
   </div>
   <div class="form-group">
-    <label class="control-label">Observation Page</label>
+    <label class="control-label">Сторінка спостережень</label>
     <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.page_observation">
   </div>
   <div class="form-group">
-    <label class="control-label">Comment</label>
+    <label class="control-label">Примітка</label>
     <input class="form-control form-control-width" ng-model="modalAnnualsCtrl.annual.comment">
   </div>
   <div class="form-group">
-    <label class="control-label">Snow Melting</label>
+    <label class="control-label">Схід снігу</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -54,7 +54,7 @@
     </p>
   </div>
   <div class="form-group">
-    <label class="control-label">Ground Observation Begin</label>
+    <label class="control-label">Початок спостережень майданчику</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -68,7 +68,7 @@
     </p>
   </div>
   <div class="form-group">
-    <label class="control-label">Ground Observation End</label>
+    <label class="control-label">Закінчення спостережень майданчику</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -82,7 +82,7 @@
     </p>
   </div>
   <div class="form-group">
-    <label class="control-label">Water Freezing</label>
+    <label class="control-label">Замерзання води</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -96,7 +96,7 @@
     </p>
   </div>
   <div class="form-group">
-    <label class="control-label">Ice Clean</label>
+    <label class="control-label">Очищення від льоду</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -110,7 +110,7 @@
     </p>
   </div>
   <div class="form-group">
-    <label class="control-label">Water Observation Begin</label>
+    <label class="control-label">Початок спостережень водойми</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -124,7 +124,7 @@
     </p>
   </div>
   <div class="form-group">
-    <label class="control-label">Water Observation End</label>
+    <label class="control-label">Закінчення спостережень водойми</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -138,7 +138,7 @@
     </p>
   </div>
   <div class="form-group">
-    <label class="control-label">Ice Cover</label>
+    <label class="control-label">Встановлення льодового покриву</label>
     <p class="input-group">
       <input class="form-control form-control-width"
       datepicker-popup
@@ -155,5 +155,5 @@
 
 <div class="modal-footer">
   <button class="btn btn-success" ng-click="modalAnnualsCtrl.ok()">OK</button>
-  <button class="btn btn-default" ng-click="modalAnnualsCtrl.cancel()">Cancel</button>
+  <button class="btn btn-default" ng-click="modalAnnualsCtrl.cancel()">Відмінити</button>
 </div>

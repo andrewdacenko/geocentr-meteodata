@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="meteodata">
 <head>
-  <title>Geocentr</title>
+  <title>База метеоспростережень</title>
   <link rel="stylesheet" type="text/css" href="/bower/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
@@ -10,25 +10,25 @@
     <div class="header" ng-controller="WindowToolbar">
       <div class="btn-group pull-right">
         <button ng-click="windowMinimize()" type="button" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-minus"></span> Minimize
+          <span class="glyphicon glyphicon-minus"></span> Згорнути
         </button>
         <button ng-click="windowToggleFullscreen()" type="button" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-fullscreen"></span> Fullscreen
+          <span class="glyphicon glyphicon-fullscreen"></span> Повний екран
         </button>
         <button ng-click="windowClose()" type="button" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-remove"></span> Close
+          <span class="glyphicon glyphicon-remove"></span> Зачинити
         </button>
       </div>
-      <h3 class="text-muted">Geocentr - Meteodata</h3>
+      <h3 class="text-muted">Електронна форма для запису метеоспостережень</h3>
     </div>
 
     <ul class="nav nav-tabs">
-      <li role="presentation" ui-sref-active="active"><a ui-sref="stations">Stations</a></li>
-      <li role="presentation" ui-sref-active="active"><a ui-sref="annuals">Annual</a></li>
-      <li role="presentation" ui-sref-active="active"><a ui-sref="months">Monthly</a></li>
-      <li role="presentation" ui-sref-active="active"><a ui-sref="days">Daily</a></li>
-      <li role="presentation" ui-sref-active="active"><a ui-sref="employees">Employees</a></li>
-      <li role="presentation" ui-sref-active="active"><a ui-sref="tools">Tools</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="stations">Станції</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="annuals">Щорічна</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="months">Місячна</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="days">Щоденна</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="employees">Співробітники</a></li>
+      <li role="presentation" ui-sref-active="active"><a ui-sref="tools">Прилади</a></li>
     </ul>
     
     <div ui-view></div>

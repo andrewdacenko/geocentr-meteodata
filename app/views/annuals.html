@@ -1,4 +1,4 @@
-<h1 class="page-header">Annual Reports
+<h1 class="page-header">Щорічні звіти
   <small>
     <a class="btn btn-xs btn-success" ng-click="annualsCtrl.addOrEdit()">
       <i class="glyphicon glyphicon-plus"></i>
@@ -7,24 +7,24 @@
 </h1>
 
 <div class="form-inline">
-  <label>Generate report: </label>
+  <label>Згенерувати звіт: </label>
   <div class="input-group input-group-sm" style="width:200px;">
     <input type="text" class="form-control" placeholder="2015" ng-model="year">
     <span class="input-group-btn">
-      <a ng-href="annuals/report?year={{year || 2015}}" class="btn btn-default">Only year</a>
+      <a ng-href="annuals/report?year={{year || 2015}}" class="btn btn-default">За весь рік</a>
     </span>
   </div>
 
-  <label>Start month: </label>
+  <label>Місяць початку: </label>
   <div class="input-group input-group-sm" style="width:200px;">
     <input type="text" class="form-control" placeholder="2" ng-model="start">
   </div>
 
-  <label>Start month: </label>
+  <label>Місяць закінчення: </label>
   <div class="input-group input-group-sm" style="width:200px;">
     <input type="text" class="form-control" placeholder="8" ng-model="end">
     <span class="input-group-btn">
-      <a ng-href="annuals/day?year={{year || 2015}}&start={{start || 2}}&end={{end || 8}}" class="btn btn-default">Go</a>
+      <a ng-href="annuals/day?year={{year || 2015}}&start={{start || 2}}&end={{end || 8}}" class="btn btn-default">Генерувати</a>
     </span>
   </div>
 </div>
@@ -35,85 +35,85 @@
       <tr>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('station_id')}" 
             ng-click="annualsCtrl.orderBy('station_id')">
-            Station
+            Станція
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('station_id')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('year')}" 
             ng-click="annualsCtrl.orderBy('year')">
-            Year
+            Рік
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('year')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('number')}" 
             ng-click="annualsCtrl.orderBy('number')">
-            Number
+            Порядковий №
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('number')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('angle_continental')}" 
             ng-click="annualsCtrl.orderBy('angle_continental')">
-            Angle Continental
+            Континентальний кут
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('angle_continental')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('angle_shore')}" 
             ng-click="annualsCtrl.orderBy('angle_shore')">
-            Angle Shore
+            Береговий кут
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('angle_shore')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('page_station')}" 
             ng-click="annualsCtrl.orderBy('page_station')">
-            Station Page
+            Сторінка станції
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('page_station')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('page_observation')}" 
             ng-click="annualsCtrl.orderBy('page_observation')">
-            Observation Page
+            Сторінка спостережень
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('page_observation')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('comment')}" 
             ng-click="annualsCtrl.orderBy('comment')">
-            Comment
+            Примітка
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('comment')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('snow_melting')}" 
             ng-click="annualsCtrl.orderBy('snow_melting')">
-            Snow Melting
+            Схід снігу
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('snow_melting')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('observation_begin_g')}" 
             ng-click="annualsCtrl.orderBy('observation_begin_g')">
-            Ground Observation Begin
+            Початок спостережень майданчику
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_begin_g')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('observation_end_g')}" 
             ng-click="annualsCtrl.orderBy('observation_end_g')">
-            Ground Observation End
+            Закінчення спостережень майданчику
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_end_g')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('water_freezing')}" 
             ng-click="annualsCtrl.orderBy('water_freezing')">
-            Water Freezing
+            Замерзання води
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('water_freezing')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('ice_clean')}" 
             ng-click="annualsCtrl.orderBy('ice_clean')">
-            Ice Clean
+            Очищення від льоду
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('ice_clean')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('observation_begin_w')}" 
             ng-click="annualsCtrl.orderBy('observation_begin_w')">
-            Water Observation Begin
+            Початок спостережень водойми
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_begin_w')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('observation_end_w')}" 
             ng-click="annualsCtrl.orderBy('observation_end_w')">
-            Water Observation End
+            Закінчення спостережень водойми
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('observation_end_w')"></i>
         </th>
         <th ng-class="{'main-order': annualsCtrl.isOrderedBy('ice_cover')}" 
             ng-click="annualsCtrl.orderBy('ice_cover')">
-            Ice Cover
+            Встановлення льодового покриву
             <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!annualsCtrl.reverse, 'glyphicon-menu-up': !annualsCtrl.reverse}" ng-if="annualsCtrl.isOrderedBy('ice_cover')"></i>
         </th>
-        <th>Action</th>
+        <th>Дія</th>
       </tr>
     </thead>
     <tbody>
@@ -251,7 +251,7 @@
           </p>
         </td>
         <td>
-          <button class="btn btn-success" ng-click="annualsCtrl.clearFilter()">Clear</button>
+          <button class="btn btn-success" ng-click="annualsCtrl.clearFilter()">Очистити</button>
         </td>
       </tr>
       <tr ng-repeat="annual in annualsCtrl.annuals | filter:annualsCtrl.filter | orderBy:annualsCtrl.order:annualsCtrl.reverse">

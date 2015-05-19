@@ -1,4 +1,4 @@
-<h1 class="page-header">Tools
+<h1 class="page-header">Прилади
   <small>
     <a class="btn btn-xs btn-success" ng-click="toolsCtrl.addOrEdit()">
       <i class="glyphicon glyphicon-plus"></i>
@@ -11,10 +11,10 @@
     <tr>
       <th ng-class="{'main-order': toolsCtrl.isOrderedBy('name')}" 
           ng-click="toolsCtrl.orderBy('name')">
-          Name
+          Назва
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!toolsCtrl.reverse, 'glyphicon-menu-up': !toolsCtrl.reverse}" ng-if="toolsCtrl.isOrderedBy('name')"></i>
       </th>
-      <th>Action</th>
+      <th>Дія</th>
     </tr>
   </thead>
   <tbody>
@@ -23,7 +23,7 @@
         <input class="form-control" ng-model="toolsCtrl.filter.name">
       </td>
       <td>
-        <button class="btn btn-success" ng-click="toolsCtrl.clearFilter()">Clear</button>
+        <button class="btn btn-success" ng-click="toolsCtrl.clearFilter()">Очистити</button>
       </td>
     </tr>
     <tr ng-repeat="tool in toolsCtrl.tools | filter:toolsCtrl.filter | orderBy:toolsCtrl.order:toolsCtrl.reverse">

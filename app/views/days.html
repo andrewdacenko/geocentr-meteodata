@@ -1,4 +1,4 @@
-<h1 class="page-header">Daily Reports 
+<h1 class="page-header">Щоденна таблиця 
   <small>
     <a class="btn btn-xs btn-success" ng-click="daysCtrl.addOrEdit()">
       <i class="glyphicon glyphicon-plus"></i>
@@ -12,130 +12,130 @@
       <tr>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('station_id')}" 
             ng-click="daysCtrl.orderBy('station_id')">
-          Station
+          Станція
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('station_id')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('year')}" 
             ng-click="daysCtrl.orderBy('year')">
-          Year
+          Рік
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('year')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('month')}" 
             ng-click="daysCtrl.orderBy('month')">
-          Month
+          Місяць
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('month')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('day')}" 
             ng-click="daysCtrl.orderBy('day')">
-          Day
+          День
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('day')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_1')}" 
             ng-click="daysCtrl.orderBy('vapour_1')">
-          Pool Vapour
+          Басейн: випаровування, мм/доб
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_1')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_1')}" 
             ng-click="daysCtrl.orderBy('temp_1')">
-          Pool Temperaure
+          Температура, °C
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_1')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_1')}" 
             ng-click="daysCtrl.orderBy('press_1')">
-          Pool Pressure
+          Тиск насиченної пари, гПа
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_1')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_2')}" 
             ng-click="daysCtrl.orderBy('vapour_2')">
-          Evaporator (3000) Vapour
+          Випарник(3000): випаровування, мм/доб
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_2')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_2')}" 
             ng-click="daysCtrl.orderBy('temp_2')">
-          Evaporator (3000) Temperaure
+          Температура, °C
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_2')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_2')}" 
             ng-click="daysCtrl.orderBy('press_2')">
-          Evaporator (3000) Pressure
+          Тиск насиченної пари, гПа
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_2')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_3')}" 
             ng-click="daysCtrl.orderBy('vapour_3')">
-          Evaporator Vapour
+          Випарник: випаровування, мм/доб
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_3')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_3')}" 
             ng-click="daysCtrl.orderBy('temp_3')">
-          Evaporator Temperaure
+          Температура, °C
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_3')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_3')}" 
             ng-click="daysCtrl.orderBy('press_3')">
-          Evaporator Pressure
+          Тиск насиченної пари, гПа
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_3')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_w_4')}" 
             ng-click="daysCtrl.orderBy('temp_w_4')">
-          Water Temperature
+          Водойма: температура, °C
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_w_4')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_4')}" 
             ng-click="daysCtrl.orderBy('press_4')">
-          Vapor Pressure
+          Водойма: тиск насиченної пари, гПа
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_4')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_a')}" 
             ng-click="daysCtrl.orderBy('temp_a')">
-          Air Temperature
+          Температура повітря, °C
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_a')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('part_press')}" 
             ng-click="daysCtrl.orderBy('part_press')">
-          Partial Pressure
+          Парціальний тиск пари, гПа
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('part_press')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('wind')}" 
             ng-click="daysCtrl.orderBy('wind')">
-          Wind Speed
+          Швидкість вітру, м/с
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('wind')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('soil_temp')}" 
             ng-click="daysCtrl.orderBy('soil_temp')">
-          Soil Temperature
+          Температура грунту на глибині 20 см, °C
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('soil_temp')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('falls')}" 
             ng-click="daysCtrl.orderBy('falls')">
-          Falls
+          Опади за добу, мм
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('falls')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_1')}" 
             ng-click="daysCtrl.orderBy('press_diff_1')">
-          Pool Pressure Difference
+          Різниця тиску вод. пари. Басейн
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_1')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_2')}" 
             ng-click="daysCtrl.orderBy('press_diff_2')">
-          Evapourator Pressure Difference
+          Різниця тиску вод. пари. Випарник
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_2')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_3')}" 
             ng-click="daysCtrl.orderBy('press_diff_3')">
-          Evaporator (3000) Pressure Difference
+          Різниця тиску вод. пари. Випарник(3000)
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_3')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_diff_4')}" 
             ng-click="daysCtrl.orderBy('press_diff_4')">
-          Water Pressure Difference
+          Різниця тиску вод. пари. Водойма
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_diff_4')"></i>
         </th>
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('comment')}" 
             ng-click="daysCtrl.orderBy('comment')">
-          Comment
+          Примітка
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('comment')"></i>
         </th>
-        <th>Action</th>
+        <th>Дія</th>
       </tr>
     </thead>
     <tbody>
@@ -224,7 +224,7 @@
           <input class="form-control form-control-width" ng-model="daysCtrl.filter.comment">
         </td>
         <td>
-          <button class="btn btn-success" ng-click="daysCtrl.clearFilter()">Clear</button>
+          <button class="btn btn-success" ng-click="daysCtrl.clearFilter()">Очистити</button>
         </td>
       </tr>
       <tr ng-repeat="day in daysCtrl.days | filter:daysCtrl.filter | orderBy:daysCtrl.order:daysCtrl.reverse">

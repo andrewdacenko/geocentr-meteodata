@@ -4,34 +4,34 @@
 
 <div class="modal-body">
   <div class="form-group">
-    <label class="control-label">Name</label>
+    <label class="control-label">Ім'я</label>
     <input class="form-control" ng-model="modalEmployeesCtrl.employee.name">
   </div>
   <div class="form-group">
-    <label class="control-label">Middlename</label>
+    <label class="control-label">По батькові</label>
     <input class="form-control" ng-model="modalEmployeesCtrl.employee.middlename">
   </div>
   <div class="form-group">
-    <label class="control-label">Surname</label>
+    <label class="control-label">Прізвище</label>
     <input class="form-control" ng-model="modalEmployeesCtrl.employee.surname">
   </div>
   <div class="form-group">
-    <label class="control-label">Station</label>
+    <label class="control-label">Станція</label>
     <select class="form-control"
       ng-model="modalEmployeesCtrl.employee.station_id"
     ng-options="station._id as station.name for station in modalEmployeesCtrl.stations"></select>
   </div>
   <div class="form-group">
-    <label class="control-label">Position</label>
+    <label class="control-label">Посада</label>
     <input class="form-control" ng-model="modalEmployeesCtrl.employee.position">
   </div>
   <div class="form-group">
-    <label class="control-label">Description</label>
+    <label class="control-label">Примітки</label>
     <input class="form-control" ng-model="modalEmployeesCtrl.employee.description">
   </div>
 </div>
 
 <div class="modal-footer">
   <button class="btn btn-success" ng-click="modalEmployeesCtrl.ok()">OK</button>
-  <button class="btn btn-default" ng-click="modalEmployeesCtrl.cancel()">Cancel</button>
+  <button class="btn btn-default" ng-click="modalEmployeesCtrl.cancel()">Відмінити</button>
 </div>

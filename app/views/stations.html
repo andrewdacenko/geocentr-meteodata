@@ -1,4 +1,4 @@
-<h1 class="page-header">Stations
+<h1 class="page-header">Станції
   <small>
     <a class="btn btn-xs btn-success" ng-click="stationsCtrl.addOrEdit()">
       <i class="glyphicon glyphicon-plus"></i>
@@ -11,50 +11,50 @@
     <tr>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('name')}" 
           ng-click="stationsCtrl.orderBy('name')">
-          Name
+          Станція назва
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('name')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('coordinates')}" 
           ng-click="stationsCtrl.orderBy('coordinates')">
-          Coordinates
+          Координатний номер
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('coordinates')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('region')}" 
           ng-click="stationsCtrl.orderBy('region')">
-          Region
+          Область
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('region')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('district')}" 
           ng-click="stationsCtrl.orderBy('district')">
-          District
+          Район
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('district')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('city')}" 
           ng-click="stationsCtrl.orderBy('city')">
-          City
+          Населений пункт
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('city')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('index')}" 
           ng-click="stationsCtrl.orderBy('index')">
-          Index
+          Індекс
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('index')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('height')}" 
           ng-click="stationsCtrl.orderBy('height')">
-          Height
+          Висота над рівнем моря
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('height')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('open')}" 
           ng-click="stationsCtrl.orderBy('open')">
-          Open
+          Відкриття
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('open')"></i>
       </th>
       <th ng-class="{'main-order': stationsCtrl.isOrderedBy('close')}" 
           ng-click="stationsCtrl.orderBy('close')">
-          Close
+          Закриття
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!stationsCtrl.reverse, 'glyphicon-menu-up': !stationsCtrl.reverse}" ng-if="stationsCtrl.isOrderedBy('close')"></i>
       </th>
-      <th>Action</th>
+      <th>Дія</th>
     </tr>
   </thead>
   <tbody>
@@ -87,7 +87,7 @@
         <input class="form-control" ng-model="stationsCtrl.filter.close">
       </td>
       <td>
-        <button class="btn btn-success" ng-click="stationsCtrl.clearFilter()">Clear</button>
+        <button class="btn btn-success" ng-click="stationsCtrl.clearFilter()">Очистити</button>
       </td>
     </tr>
     <tr ng-repeat="station in stationsCtrl.stations | filter:stationsCtrl.filter | orderBy:stationsCtrl.order:stationsCtrl.reverse">
