@@ -208,34 +208,64 @@ app.get('/annuals/day', function(req, res) {
       return res.end(error);
     };
     var days = data.days;
+    /*for (key in days){
+      for (prop in days[key]){
+        if ((typeof days[key][prop]) == "string") {
+          //console.log('typeof days[key][prop]', typeof days[key][prop]);
+          days[key][prop] = days[key][prop].replace(",",".");
+        };
+        //console.log('DAYS KEY', days[key][prop].replace(",","."));
+      }
+    }*/
     var annuals = data.annuals;
     var findMiddle = function(arr, mid) {
-      var count = arr.length;
+      var count = 0;
       var result = 0;
-      for (var i = 0; i < count; i++) {
+      console.log("arr.length", arr.length);
+      for (var i = 0; i < arr.length; i++) {
+        //console.log('isNaN(+arr[i])', isNaN(+arr[i]));
+        if (isNaN(+arr[i])) {
+          //console.log('in the cycle arr[i]', arr[i]);
+          //console.log('in the cycle +arr[i]', +arr[i]);
+          continue;
+        }
         result += +arr[i];
+        count++;
       };
+      //console.log('RESULT', result);
       if (mid) result /= count;
       return result;
     };
     var calcValue = function(arr, from, to, field, mid) {
-      //console.log('calcValue, arr = ', arr[3], field, from, to)
+      //console.log('calcValue, arr = ', arr, field, from, to);
       var result = [];
+      //console.log('arr.length', arr.length);
       for (var i = 1; i < arr.length; i++) {
-        //console.log(arr[i].day);
+        //console.log("arr[i]", arr[i]);
+        //console.log("arr[i].day",arr[i].day);
         if ((arr[i]) && +arr[i].day >= from && +arr[i].day <= to) {
+          //console.log('arr[i][field] ', i, field, +arr[i][field]);
           result.push(+arr[i][field]);
         }
-      };
-      console.log(result)
+      }
+      //console.log("i", i);
+
+      //console.log('calcvalue result', result);
       return findMiddle(result, mid)
     }
     var result = {};
     var obj = {};
+
+    //console.log('days.length', days.length);
+    //console.log('days ', days);
     for (var i = 0; i < days.length; i++) {
       var day = days[i];
+      //console.log('day', day);
+      console.log('days',days)
+      console.log('day.month',day.month);
       (obj[day.month]) ? obj[day.month][+day.day] = day : obj[day.month] = [];
     };
+
     for (var i = start; i <= end; i++) {
       var table = [];
       ['1', '2', '3', 'місяць'].forEach(function(item, j, arr) {
@@ -267,7 +297,7 @@ app.get('/annuals/day', function(req, res) {
       result[item] = values[0] + '.' + values[1];
     })
 
-    console.log(result);
+    //console.log(result);
 
     //need to output result
     var template_file = path.join(__dirname, 'templates', 'tmp.xlsx');
