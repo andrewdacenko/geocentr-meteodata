@@ -171,8 +171,8 @@ app.get('/annuals', function(req, res) {
 
 app.get('/annuals/day', function(req, res) {
   var year = +req.query.year || 2015;
-  var start = +req.query.start || 4;
-  var end = +req.query.end || 5;
+  var start = +req.query.start || 3;
+  var end = +req.query.end || 3;
   async.waterfall([
 
     function findAnnual(callback) {
@@ -208,62 +208,87 @@ app.get('/annuals/day', function(req, res) {
       return res.end(error);
     };
     var days = data.days;
-    /*for (key in days){
+
+    for (key in days){
       for (prop in days[key]){
         if ((typeof days[key][prop]) == "string") {
-          //console.log('typeof days[key][prop]', typeof days[key][prop]);
           days[key][prop] = days[key][prop].replace(",",".");
-        };
-        //console.log('DAYS KEY', days[key][prop].replace(",","."));
+        }
       }
-    }*/
+    }
+
     var annuals = data.annuals;
-    var findMiddle = function(arr, mid) {
+    
+    var numberOfDays = function(year, month) {
+      var d = new Date(year, month, 0);
+      return d.getDate();
+    }
+
+    var findMiddle = function(arr, mid, monthNum, daysCount) {
       var count = 0;
       var result = 0;
-      console.log("arr.length", arr.length);
+
       for (var i = 0; i < arr.length; i++) {
-        //console.log('isNaN(+arr[i])', isNaN(+arr[i]));
-        if (isNaN(+arr[i])) {
-          //console.log('in the cycle arr[i]', arr[i]);
-          //console.log('in the cycle +arr[i]', +arr[i]);
+        if (isNaN(+arr[i]) || (arr[i] == "") || (arr[i] == "-0")) {
           continue;
         }
-        result += +arr[i];
+        result += (+arr[i]*10) ^ 0;
         count++;
       };
-      //console.log('RESULT', result);
-      if (mid) result /= count;
+
+      result /= 10;
+
+      if (mid){
+        result /= count;
+        result = Math.round(result * 10) / 10;
+      } 
+
+      if (daysCount == 30){
+        if (count != numberOfDays(+annuals.year, monthNum) && mid)
+          return "-";
+        else
+          return result;
+      }
+
+      if (count == 0)
+        return "-";
+
+      if (count < daysCount + 1){
+        switch (count){
+          case 2: 
+          case 3: result += String.fromCharCode(176 + count); break;
+          //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
+          default: result += String.fromCharCode(8304 + count);
+        }
+        result = result.replace(".",",");
+      }
       return result;
     };
-    var calcValue = function(arr, from, to, field, mid) {
+    var calcValue = function(arr, from, to, field, mid, monthNum) {
       //console.log('calcValue, arr = ', arr, field, from, to);
       var result = [];
-      //console.log('arr.length', arr.length);
+
       for (var i = 1; i < arr.length; i++) {
-        //console.log("arr[i]", arr[i]);
-        //console.log("arr[i].day",arr[i].day);
         if ((arr[i]) && +arr[i].day >= from && +arr[i].day <= to) {
-          //console.log('arr[i][field] ', i, field, +arr[i][field]);
-          result.push(+arr[i][field]);
+          result.push(arr[i][field]);
         }
       }
-      //console.log("i", i);
 
-      //console.log('calcvalue result', result);
-      return findMiddle(result, mid)
+      return findMiddle(result, mid, monthNum, to-from);
     }
+
     var result = {};
     var obj = {};
 
-    //console.log('days.length', days.length);
-    //console.log('days ', days);
     for (var i = 0; i < days.length; i++) {
       var day = days[i];
-      //console.log('day', day);
-      console.log('days',days)
-      console.log('day.month',day.month);
-      (obj[day.month]) ? obj[day.month][+day.day] = day : obj[day.month] = [];
+      if (obj[day.month]){
+        obj[day.month][+day.day]  = day;
+      }
+      else {
+        obj[day.month] = [];
+        obj[day.month][+day.day]  = day;
+      }
     };
 
     for (var i = start; i <= end; i++) {
@@ -275,10 +300,11 @@ app.get('/annuals/day', function(req, res) {
       });
       ["vapour_2", "temp_2", "press_2", "temp_a", "part_press", "wind", "soil_temp", "falls"].forEach(function(item, j, arr) {
         var mid = (item == "falls") ? 0 : 1;
-        table[0][item] = calcValue(obj[i], 1, 10, item, mid);
-        table[1][item] = calcValue(obj[i], 11, 20, item, mid);
-        table[2][item] = calcValue(obj[i], 21, 31, item, mid);
-        table[3][item] = calcValue(obj[i], 1, 31, item, mid);
+        console.log('i', i)
+        table[0][item] = calcValue(obj[i], 1, 10, item, mid, i);
+        table[1][item] = calcValue(obj[i], 11, 20, item, mid, i);
+        table[2][item] = calcValue(obj[i], 21, 31, item, mid, i);
+        table[3][item] = calcValue(obj[i], 1, 31, item, mid, i);
       });
       result['table' + i] = table;
     };
@@ -297,8 +323,6 @@ app.get('/annuals/day', function(req, res) {
       result[item] = values[0] + '.' + values[1];
     })
 
-    //console.log(result);
-
     //need to output result
     var template_file = path.join(__dirname, 'templates', 'tmp.xlsx');
 
@@ -316,9 +340,6 @@ app.get('/annuals/day', function(req, res) {
       res.end(binary, 'binary');
     })
   });
-
-
-
 });
 
 app.get('/annuals/report', function(req, res) {
