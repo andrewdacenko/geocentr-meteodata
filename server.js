@@ -258,6 +258,7 @@ app.get('/annuals/day', function(req, res) {
           case 2: 
           case 3: result += String.fromCharCode(176 + count); break;
           //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
+          case 10: result += ""; break;
           default: result += String.fromCharCode(8304 + count);
         }
         result = result.replace(".",",");
@@ -300,7 +301,6 @@ app.get('/annuals/day', function(req, res) {
       });
       ["vapour_2", "temp_2", "press_2", "temp_a", "part_press", "wind", "soil_temp", "falls"].forEach(function(item, j, arr) {
         var mid = (item == "falls") ? 0 : 1;
-        console.log('i', i)
         table[0][item] = calcValue(obj[i], 1, 10, item, mid, i);
         table[1][item] = calcValue(obj[i], 11, 20, item, mid, i);
         table[2][item] = calcValue(obj[i], 21, 31, item, mid, i);
@@ -311,8 +311,9 @@ app.get('/annuals/day', function(req, res) {
     for (var i = 1; i <= 12; i++) {
       result['table' + i] = result['table' + i] || []
     };
+    
     result.year = "" + annuals.year;
-    result.station = annuals.station;
+    result.station = annuals.number + ". " + annuals.station;
     ["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g"].forEach(function(item, i, arr) {
       var date = new Date(annuals[item]);
       console.log(typeof date)
