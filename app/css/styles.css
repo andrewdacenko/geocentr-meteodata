@@ -13,3 +13,8 @@
 th.main-order {
 	background-color: #d9edf7
 }
+
+label.report-generation {
+	font-size: 22px;
+	color: red;
+}

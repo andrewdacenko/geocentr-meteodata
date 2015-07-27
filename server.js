@@ -170,16 +170,20 @@ app.get('/annuals', function(req, res) {
 });
 
 app.get('/annuals/day', function(req, res) {
+  var stationId = req.query.station;
   var year = +req.query.year || 2015;
   var start = +req.query.start || 3;
   var end = +req.query.end || 3;
+  //console.log("STANCIYA", station);
   async.waterfall([
 
     function findAnnual(callback) {
       db.annuals.findOne({
-        year: year
+        year: year,
+        station_id: stationId
       }, function(err, annual) {
         if (err) return callback(err);
+        //console.log(annual);
         callback(null, annual)
       });
     },
@@ -194,7 +198,8 @@ app.get('/annuals/day', function(req, res) {
     },
     function findDays(annuals, callback) {
       db.days.find({
-        year: year
+        year: year,
+        station_id: stationId
       }, function(err, days) {
         if (err) return callback(err);
         callback(null, {
@@ -255,6 +260,7 @@ app.get('/annuals/day', function(req, res) {
 
       if (count < daysCount + 1){
         switch (count){
+          case 1: result += String.fromCharCode(185); break;
           case 2: 
           case 3: result += String.fromCharCode(176 + count); break;
           //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;

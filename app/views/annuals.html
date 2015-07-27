@@ -7,16 +7,23 @@
 </h1>
 
 <div class="form-inline">
-  <label>Згенерувати звіт: </label>
+  <label class="report-generation">Згенерувати звіт: </label>
+  <br>
+  <label>Станція: </label>
   <div class="input-group input-group-sm" style="width:200px;">
+    <select class="form-control form-control-width" 
+          ng-model="station"
+          ng-options="station._id as station.name for station in annualsCtrl.stations">
+    </select>
+  </div>
+
+  <label>Рік: </label>
+  <div class="input-group input-group-sm" style="width:100px;">
     <input type="text" class="form-control" placeholder="2015" ng-model="year">
-    <span class="input-group-btn">
-      <a ng-href="annuals/report?year={{year || 2015}}" class="btn btn-default">За весь рік</a>
-    </span>
   </div>
 
   <label>Місяць початку: </label>
-  <div class="input-group input-group-sm" style="width:200px;">
+  <div class="input-group input-group-sm" style="width:100px;">
     <input type="text" class="form-control" placeholder="2" ng-model="start">
   </div>
 
@@ -24,10 +31,11 @@
   <div class="input-group input-group-sm" style="width:200px;">
     <input type="text" class="form-control" placeholder="8" ng-model="end">
     <span class="input-group-btn">
-      <a ng-href="annuals/day?year={{year || 2015}}&start={{start || 2}}&end={{end || 8}}" class="btn btn-default">Генерувати</a>
+      <a ng-href="annuals/day?station={{station}}&year={{year || 2015}}&start={{start || 2}}&end={{end || 8}}" class="btn btn-default">Генерувати</a>
     </span>
   </div>
 </div>
+<hr>
 
 <div class="table-responsive table-responsive-heightened">
   <table class="table table-hovered">
