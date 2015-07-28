@@ -87,7 +87,7 @@
         controller: function($modalInstance) {
           var self = this;
 
-          self.title = existingDay ? 'Edit Daily Report' : 'Add Daily Report';
+          self.title = existingDay ? 'Редагування данних' : 'Додавання данних';
 
           self.day = angular.copy(modalDay);
           self.stations = stations;

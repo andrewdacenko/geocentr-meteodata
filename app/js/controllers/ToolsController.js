@@ -50,7 +50,7 @@
         controller: function($modalInstance) {
           var self = this;
 
-          self.title = existingTool ? 'Edit Tool' : 'Add Tool';
+          self.title = existingTool ? 'Редагування приладу' : 'Додавання приладу';
 
           self.tool = angular.copy(modalTool);
 

@@ -58,7 +58,7 @@
         controller: function($modalInstance) {
           var self = this;
 
-          self.title = existingEmployee ? 'Edit Employee' : 'Add Employee';
+          self.title = existingEmployee ? 'Редагування співробітника' : 'Додати співробітника';
 
           self.employee = angular.copy(modalEmployee);
           self.stations = stations;

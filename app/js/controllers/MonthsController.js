@@ -83,7 +83,7 @@
         controller: function($modalInstance) {
           var self = this;
 
-          self.title = existingMonth ? 'Edit Monthly Report' : 'Add Monthly Report';
+          self.title = existingMonth ? 'Редагувати місячний звіт' : 'Додати місячний звіт';
 
           self.month = angular.copy(modalMonth);
           self.stations = stations;

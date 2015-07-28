@@ -78,7 +78,7 @@
         controller: function($modalInstance) {
           var self = this;
 
-          self.title = existingAnnual ? 'Edit Annual Report' : 'Add Annual Report';
+          self.title = existingAnnual ? 'Редагувати щорічний звіт' : 'Додати щорічний звіт';
 
           self.isOpen = {};
 

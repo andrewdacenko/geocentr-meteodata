@@ -58,7 +58,7 @@
         controller: function($modalInstance) {
           var self = this;
 
-          self.title = existingStation ? 'Edit Station' : 'Add Station';
+          self.title = existingStation ? 'Редагування станції' : 'Додавання станції';
 
           self.station = angular.copy(modalStation);
 
