@@ -343,13 +343,214 @@ app.get('/annuals/day', function(req, res) {
       };
 
       res.setHeader('Content-Type', 'application/vnd.openxmlformats');
-      res.setHeader("Content-Disposition", "attachment; filename=day" + year + start + end + ".xlsx");
+      res.setHeader("Content-Disposition", "attachment; filename=Yearly report Station" + annuals.number + " " + year + "_" + start + "-" + end + ".xlsx");
       res.end(binary, 'binary');
     })
   });
 });
 
-app.get('/annuals/report', function(req, res) {
+//days report
+app.get('/days/day', function(req, res) {
+  var stationId = req.query.station;
+  var year = +req.query.yearNum || 2015;
+  var month = +req.query.monthNum || 3;
+  async.waterfall([
+
+    function findAnnual(callback) {
+      db.annuals.findOne({
+        year: year,
+        station_id: stationId
+      }, function(err, annual) {
+        if (err) return callback(err);
+        callback(null, annual)
+      });
+    },
+    function collectStations(annual, callback) {
+      db.stations.findOne({
+        _id: annual.station_id
+      }, function(err, station) {
+        if (err) return callback(err);
+        annual.station = station.name;
+        callback(null, annual);
+      })
+    },
+    function findDays(annuals, callback) {
+      db.days.find({
+        year: year,
+        station_id: stationId
+      }, function(err, days) {
+        if (err) return callback(err);
+        callback(null, {
+          annuals: annuals,
+          days: days
+        });
+      });
+    }
+  ], function(err, data) {
+    if (err) {
+      return res.end(error);
+    };
+    var days = data.days;
+
+    for (key in days){
+      for (prop in days[key]){
+        if ((typeof days[key][prop]) == "string") {
+          days[key][prop] = days[key][prop].replace(",",".");
+        }
+      }
+    }
+
+    var annuals = data.annuals;
+    
+    var numberOfDays = function(year, month) {
+      var d = new Date(year, month, 0);
+      return d.getDate();
+    }
+
+    var findMiddle = function(arr, mid, monthNum, daysCount) {
+      var count = 0;
+      var result = 0;
+
+      for (var i = 0; i < arr.length; i++) {
+        if (isNaN(+arr[i]) || (arr[i] == "") || (arr[i] == "-0")) {
+          continue;
+        }
+        result += (+arr[i]*10) ^ 0;
+        count++;
+      };
+
+      result /= 10;
+
+      if (mid){
+        result /= count;
+        result = Math.round(result * 10) / 10;
+      } 
+
+      if (daysCount == 30){
+          return result;
+      }
+
+      if (count == 0)
+        return "-";
+
+      if (count < daysCount + 1){
+        switch (count){
+          case 1: result += String.fromCharCode(185); break;
+          case 2: 
+          case 3: result += String.fromCharCode(176 + count); break;
+          //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
+          case 10: result += ""; break;
+          default: result += String.fromCharCode(8304 + count);
+        }
+        result = result.replace(".",",");
+      }
+      return result;
+    };
+    var calcValue = function(arr, from, to, field, mid, monthNum) {
+      //console.log('calcValue, arr = ', arr, field, from, to);
+      var result = [];
+
+      for (var i = 1; i < arr.length; i++) {
+        if ((arr[i]) && +arr[i].day >= from && +arr[i].day <= to) {
+          result.push(arr[i][field]);
+        }
+      }
+
+      return findMiddle(result, mid, monthNum, (to-from));
+    }
+
+    var result = {};
+    var obj = {};
+
+    for (var i = 0; i < days.length; i++) {
+      var day = days[i];
+      if (obj[day.month]){
+        obj[day.month][+day.day]  = day;
+      }
+      else {
+        obj[day.month] = [];
+        obj[day.month][+day.day]  = day;
+      }
+    };
+
+    
+    var table = [];
+    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'сума I дек.', 'середнє',
+     '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', 'сума II дек.', 'середнє',
+     '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', 'сума III дек.', 'середнє', 'сума за м-ц', 'середнє за м-ц'].forEach(function(item, j, arr) {
+      table.push({
+        index: item
+      })
+    });
+    //["vapour_2", "temp_2", "press_2", "temp_a", "part_press", "wind", "soil_temp", "falls"].forEach(function(item, j, arr) {
+      ["day", "vapour_1", "temp_1", "press_1", "vapour_2", "temp_2", "press_2", "vapour_3", 
+       "temp_3", "press_3", "temp_w_4", "press_4", "temp_a", "part_press", "wind", "falls", 
+       "press_diff_1", "press_diff_2", "press_diff_3", "press_diff_4", "comment"].forEach(function(item, j, arr) {
+      //var mid = (item == "falls") ? 0 : 1;
+
+      for(var i = 0; i < 10; i++){
+        table[i][item] = (obj[month][i+1][item] + "").replace(".",",");
+      }
+
+      table[10][item] = calcValue(obj[month], 1, 10, item, false, month); //suma
+      table[11][item] = calcValue(obj[month], 1, 10, item, true, month); //seredne
+
+      for(var i = 12; i < 22; i++){
+        table[i][item] = (obj[month][i-1][item] + "").replace(".",",");
+      }
+
+      table[22][item] = calcValue(obj[month], 11, 20, item, false, month); //suma
+      table[23][item] = calcValue(obj[month], 11, 20, item, true, month); //seredne
+      
+      for(var i = 24; i < 35; i++){
+        if (typeof obj[month][i-3] != "undefined") 
+          table[i][item] = (obj[month][i-3][item] + "").replace(".",",");
+      }
+
+      table[35][item] = calcValue(obj[month], 21, 31, item, false, month); //suma
+      table[36][item] = calcValue(obj[month], 21, 31, item, true, month); //seredne
+      table[37][item] = calcValue(obj[month], 1, 31, item, false, month); //suma
+      table[38][item] = calcValue(obj[month], 1, 31, item, true, month); //seredne
+    });
+    result['table'] = table;
+    
+    /*for (var i = 1; i <= 12; i++) {
+      result['table' + i] = result['table' + i] || []
+    };*/
+ 
+    result.year = "" + year;
+    result.month = "" + month;
+    result.station = annuals.number + ". " + annuals.station;
+    /*["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g"].forEach(function(item, i, arr) {
+      var date = new Date(annuals[item]);
+      console.log(typeof date)
+      var values = [date.getDate(), date.getMonth() + 1];
+      for (var id in values) {
+        values[id] = values[id].toString().replace(/^([0-9])$/, '0$1');
+      }
+      result[item] = values[0] + '.' + values[1];
+    }); */
+
+    //need to output result
+    var template_file = path.join(__dirname, 'templates', 'daily.xlsx');
+
+    excelReport(template_file, result, function(error, binary) {
+      if (error) {
+        res.writeHead(400, {
+          'Content-Type': 'text/plain'
+        });
+        res.end(error);
+        return;
+      };
+
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+      res.setHeader("Content-Disposition", "attachment; filename=Daily report Station" + annuals.number + " " + year + "-" + month + ".xlsx");
+      res.end(binary, 'binary');
+    })
+  });
+});
+
+/*app.get('/annuals/report', function(req, res) {
   var year = req.query.year;
 
   async.waterfall([
@@ -411,7 +612,7 @@ app.get('/annuals/report', function(req, res) {
       res.end(binary, 'binary');
     })
   })
-})
+})*/
 
 app.post('/annuals', function(req, res) {
   var item = req.body;

@@ -6,6 +6,32 @@
   </small>
 </h1>
 
+<div class="form-inline">
+  <label class="report-generation">Згенерувати звіт: </label>
+  <br>
+  <label>Станція: </label>
+  <div class="input-group input-group-sm" style="width:200px;">
+    <select class="form-control form-control-width" 
+          ng-model="station"
+          ng-options="station._id as station.name for station in daysCtrl.stations">
+    </select>
+  </div>
+
+  <label>Рік: </label>
+  <div class="input-group input-group-sm" style="width:100px;">
+    <input type="text" class="form-control" placeholder="2015" ng-model="yearNum">
+  </div>
+
+  <label>Місяць: </label>
+  <div class="input-group input-group-sm" style="width:200px;">
+    <input type="text" class="form-control" placeholder="8" ng-model="monthNum">
+    <span class="input-group-btn">
+      <a ng-href="days/day?station={{station}}&yearNum={{yearNum || 2015}}&monthNum={{monthNum || 2}}" class="btn btn-default">Генерувати</a>
+    </span>
+  </div>
+</div>
+<hr>
+
 <div class="table-responsive table-responsive-heightened">
   <table class="table table-hovered">
     <thead>
