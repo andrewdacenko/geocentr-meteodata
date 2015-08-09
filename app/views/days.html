@@ -71,21 +71,7 @@
           Тиск насиченної пари, гПа
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_1')"></i>
         </th>
-        <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_2')}" 
-            ng-click="daysCtrl.orderBy('vapour_2')">
-          Випарник(3000): випаровування, мм/доб
-          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_2')"></i>
-        </th>
-        <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_2')}" 
-            ng-click="daysCtrl.orderBy('temp_2')">
-          Температура, °C
-          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_2')"></i>
-        </th>
-        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_2')}" 
-            ng-click="daysCtrl.orderBy('press_2')">
-          Тиск насиченної пари, гПа
-          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_2')"></i>
-        </th>
+        
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_3')}" 
             ng-click="daysCtrl.orderBy('vapour_3')">
           Випарник: випаровування, мм/доб
@@ -101,6 +87,23 @@
           Тиск насиченної пари, гПа
           <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_3')"></i>
         </th>
+
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('vapour_2')}" 
+            ng-click="daysCtrl.orderBy('vapour_2')">
+          Випарник(3000): випаровування, мм/доб
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('vapour_2')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_2')}" 
+            ng-click="daysCtrl.orderBy('temp_2')">
+          Температура, °C
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('temp_2')"></i>
+        </th>
+        <th ng-class="{'main-order': daysCtrl.isOrderedBy('press_2')}" 
+            ng-click="daysCtrl.orderBy('press_2')">
+          Тиск насиченної пари, гПа
+          <i class="glyphicon" ng-class="{'glyphicon-menu-down': !!daysCtrl.reverse, 'glyphicon-menu-up': !daysCtrl.reverse}" ng-if="daysCtrl.isOrderedBy('press_2')"></i>
+        </th>
+
         <th ng-class="{'main-order': daysCtrl.isOrderedBy('temp_w_4')}" 
             ng-click="daysCtrl.orderBy('temp_w_4')">
           Водойма: температура, °C
@@ -195,15 +198,8 @@
         <td>
           <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_1">
         </td>
-        <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.filter.vapour_2">
-        </td>
-        <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_2">
-        </td>
-        <td>
-          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_2">
-        </td>
+
+        
         <td>
           <input class="form-control form-control-width" ng-model="daysCtrl.filter.vapour_3">
         </td>
@@ -213,6 +209,17 @@
         <td>
           <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_3">
         </td>
+
+        <td>
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.vapour_2">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_2">
+        </td>
+        <td>
+          <input class="form-control form-control-width" ng-model="daysCtrl.filter.press_2">
+        </td>
+
         <td>
           <input class="form-control form-control-width" ng-model="daysCtrl.filter.temp_w_4">
         </td>
@@ -261,12 +268,16 @@
         <td ng-bind="day.vapour_1"></td>
         <td ng-bind="day.temp_1"></td>
         <td ng-bind="day.press_1"></td>
-        <td ng-bind="day.vapour_2"></td>
-        <td ng-bind="day.temp_2"></td>
-        <td ng-bind="day.press_2"></td>
+        
+
         <td ng-bind="day.vapour_3"></td>
         <td ng-bind="day.temp_3"></td>
         <td ng-bind="day.press_3"></td>
+
+        <td ng-bind="day.vapour_2"></td>
+        <td ng-bind="day.temp_2"></td>
+        <td ng-bind="day.press_2"></td>
+
         <td ng-bind="day.temp_w_4"></td>
         <td ng-bind="day.press_4"></td>
         <td ng-bind="day.temp_a"></td>

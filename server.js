@@ -172,8 +172,8 @@ app.get('/annuals', function(req, res) {
 app.get('/annuals/day', function(req, res) {
   var stationId = req.query.station;
   var year = +req.query.year || 2015;
-  var start = +req.query.start || 3;
-  var end = +req.query.end || 3;
+  var start = +req.query.start || 2;
+  var end = +req.query.end || 8;
   //console.log("STANCIYA", station);
   async.waterfall([
 
