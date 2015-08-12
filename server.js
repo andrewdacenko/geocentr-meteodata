@@ -841,7 +841,7 @@ app.delete('/days/:id', function(req, res) {
 
 function redirectToErrorPage(res, message){
 	message = (typeof message == "undefined") ? "" : message;
-	res.send("\tНедостатньо даних для генерації звіту! Натисніть клавішу \"Backspace\".\n" + message);
+	res.send("<br><br><br><br><h3 align=\"center\">Недостатньо даних для генерації звіту! <br><br><br> Натисніть клавішу \"Backspace\" <br> та перевірте правильність даних необхідних для генерування звіту.\n</h3>" + message);
 }
 
 app.listen(app.get('port'));
