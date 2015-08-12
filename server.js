@@ -174,7 +174,7 @@ app.get('/annuals/day', function(req, res) {
   var year = +req.query.year || 2015;
   var start = +req.query.start || 2;
   var end = +req.query.end || 8;
-  //console.log("STANCIYA", station);
+  
   async.waterfall([
 
     function findAnnual(callback) {
@@ -182,7 +182,8 @@ app.get('/annuals/day', function(req, res) {
         year: year,
         station_id: stationId
       }, function(err, annual) {
-        if (err) return callback(err);
+				if(err) return callback(err);
+        if (annual == null) redirectToErrorPage(res);
         //console.log(annual);
         callback(null, annual)
       });
@@ -191,7 +192,7 @@ app.get('/annuals/day', function(req, res) {
       db.stations.findOne({
         _id: annual.station_id
       }, function(err, station) {
-        if (err) return callback(err);
+        if (err || station == null) return callback(err);
         annual.station = station.name;
         callback(null, annual);
       })
@@ -201,7 +202,7 @@ app.get('/annuals/day', function(req, res) {
         year: year,
         station_id: stationId
       }, function(err, days) {
-        if (err) return callback(err);
+        if (err || days == null) return callback(err);
         callback(null, {
           annuals: annuals,
           days: days
@@ -209,7 +210,7 @@ app.get('/annuals/day', function(req, res) {
       });
     }
   ], function(err, data) {
-    if (err) {
+    if (err || data == null) {
       return res.end(error);
     };
     var days = data.days;
@@ -274,12 +275,17 @@ app.get('/annuals/day', function(req, res) {
     var calcValue = function(arr, from, to, field, mid, monthNum) {
       //console.log('calcValue, arr = ', arr, field, from, to);
       var result = [];
-
-      for (var i = 1; i < arr.length; i++) {
-        if ((arr[i]) && +arr[i].day >= from && +arr[i].day <= to) {
-          result.push(arr[i][field]);
-        }
-      }
+			
+			try{
+				for (var i = 1; i < arr.length; i++) {
+					if ((arr[i]) && +arr[i].day >= from && +arr[i].day <= to) {
+						result.push(arr[i][field]);
+					}
+				}
+			} catch(e){
+				console.log(e.name + ":" + e.message + "\n" + e.stack);
+				redirectToErrorPage(res);
+			}
 
       return findMiddle(result, mid, monthNum, to-from);
     }
@@ -361,7 +367,8 @@ app.get('/days/day', function(req, res) {
         year: year,
         station_id: stationId
       }, function(err, annual) {
-        if (err) return callback(err);
+        if (err) return callback(err); 
+				if (annual == null) redirectToErrorPage(res);
         callback(null, annual)
       });
     },
@@ -369,7 +376,7 @@ app.get('/days/day', function(req, res) {
       db.stations.findOne({
         _id: annual.station_id
       }, function(err, station) {
-        if (err) return callback(err);
+        if (err || station == null) return callback(err);
         annual.station = station.name;
         callback(null, annual);
       })
@@ -379,7 +386,7 @@ app.get('/days/day', function(req, res) {
         year: year,
         station_id: stationId
       }, function(err, days) {
-        if (err) return callback(err);
+        if (err || days == null) return callback(err);
         callback(null, {
           annuals: annuals,
           days: days
@@ -487,26 +494,29 @@ app.get('/days/day', function(req, res) {
        "temp_3", "press_3", "temp_w_4", "press_4", "temp_a", "part_press", "wind", "falls", 
        "press_diff_1", "press_diff_2", "press_diff_3", "press_diff_4", "comment"].forEach(function(item, j, arr) {
       //var mid = (item == "falls") ? 0 : 1;
+			try{			
+				for(var i = 0; i < 10; i++){
+					table[i][item] = (obj[month][i+1][item] + "").replace(".",",");
+				}
+			
+				table[10][item] = calcValue(obj[month], 1, 10, item, false, month); //suma
+				table[11][item] = calcValue(obj[month], 1, 10, item, true, month); //seredne
 
-      for(var i = 0; i < 10; i++){
-        table[i][item] = (obj[month][i+1][item] + "").replace(".",",");
-      }
+				for(var i = 12; i < 22; i++){
+					table[i][item] = (obj[month][i-1][item] + "").replace(".",",");
+				}
 
-      table[10][item] = calcValue(obj[month], 1, 10, item, false, month); //suma
-      table[11][item] = calcValue(obj[month], 1, 10, item, true, month); //seredne
-
-      for(var i = 12; i < 22; i++){
-        table[i][item] = (obj[month][i-1][item] + "").replace(".",",");
-      }
-
-      table[22][item] = calcValue(obj[month], 11, 20, item, false, month); //suma
-      table[23][item] = calcValue(obj[month], 11, 20, item, true, month); //seredne
-      
-      for(var i = 24; i < 35; i++){
-        if (typeof obj[month][i-3] != "undefined") 
-          table[i][item] = (obj[month][i-3][item] + "").replace(".",",");
-      }
-
+				table[22][item] = calcValue(obj[month], 11, 20, item, false, month); //suma
+				table[23][item] = calcValue(obj[month], 11, 20, item, true, month); //seredne
+				
+				for(var i = 24; i < 35; i++){
+					if (typeof obj[month][i-3] != "undefined") 
+						table[i][item] = (obj[month][i-3][item] + "").replace(".",",");
+				}
+			} catch(e) {
+				redirectToErrorPage(res);
+			}
+			
       table[35][item] = calcValue(obj[month], 21, 31, item, false, month); //suma
       table[36][item] = calcValue(obj[month], 21, 31, item, true, month); //seredne
       table[37][item] = calcValue(obj[month], 1, 31, item, false, month); //suma
@@ -828,6 +838,11 @@ app.delete('/days/:id', function(req, res) {
     }
   });
 });
+
+function redirectToErrorPage(res, message){
+	message = (typeof message == "undefined") ? "" : message;
+	res.send("\tНедостатньо даних для генерації звіту! Натисніть клавішу \"Backspace\".\n" + message);
+}
 
 app.listen(app.get('port'));
 console.log('Server listening on port ' + app.get('port'));

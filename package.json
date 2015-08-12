@@ -4,7 +4,7 @@
   "description": "Geocentr meteodata node-webkit app",
   "main": "index.html",
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "width": 800,
     "height": 600,
     "frame": true,

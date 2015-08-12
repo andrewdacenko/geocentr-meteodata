@@ -3,8 +3,9 @@
   var years = Array.apply(null, {
     length: 100
   }).map(yearsMapFn);
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map(monthsMapFn);
-  var days = Array.apply(null, {
+  var months = ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"].map(monthsMapFn);
+  //var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map(monthsMapFn);
+	var days = Array.apply(null, {
     length: 31
   }).map(daysMapFn);
 
