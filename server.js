@@ -433,7 +433,7 @@ app.get('/days/day', function(req, res) {
     var annuals = data.annuals;
     var reportMonth = data.month;
     var tools = data.tools;
-    
+
     var numberOfDays = function(year, month) {
       var d = new Date(year, month, 0);
       return d.getDate();
@@ -600,10 +600,73 @@ app.get('/days/day', function(req, res) {
     /*for (var i = 1; i <= 12; i++) {
       result['table' + i] = result['table' + i] || []
     };*/
- 
+    var monthsNames = ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"];
+    
     result.year = "" + year;
-    result.month = "" + month;
-    result.station = annuals.number + ". " + annuals.station.name;
+    result.month = monthsNames[month-1];
+    result.station = "" + annuals.station.name;
+    result.index = "" + annuals.station.index;
+    result.region = "" + annuals.station.region;
+    result.coordinates = "" + annuals.station.coordinates;
+    result.district = "" + annuals.station.district;
+    result.city = "" + annuals.station.city;
+    result.height = "" + annuals.station.height;
+    result.head = "" + reportMonth.head;
+    result.creator = "" + reportMonth.creator;
+    //result.snow_melting = "" + annuals.snow_melting;
+    ["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g", "ice_clean", "water_freezing", "observation_begin_w", "observation_end_w", "ice_cover"].forEach(function(item, i, arr) {
+      var date = new Date(annuals[item]);
+      console.log(typeof date)
+      var values = [date.getDate(), date.getMonth(), date.getYear() + 1];
+      for (var id in values) {
+        values[id] = values[id].toString().replace(/^([0-9])$/, '0$1');
+      }
+      if (!isNaN(values[0]) && !isNaN(values[1]))
+        result[item] = values[0] + '.' + values[1];
+      else
+        result[item] = "";
+    })
+    result.square_1 = "" + reportMonth.square_1;
+    result.depth_1 = "" + reportMonth.depth_1;
+    result.external_height_1 = "" + reportMonth.external_height_1;
+    result.internal_height_1 = "" + reportMonth.internal_height_1;
+    result.square_2 = "" + reportMonth.square_2;
+    result.depth_2 = "" + reportMonth.depth_2;
+    result.external_height_2 = "" + reportMonth.external_height_2;
+    result.internal_height_2 = "" + reportMonth.internal_height_2;
+    result.square_3 = "" + reportMonth.square_3;
+    result.depth_3 = "" + reportMonth.depth_3;
+    result.external_height_3 = "" + reportMonth.external_height_3;
+    result.internal_height_3 = "" + reportMonth.internal_height_3;
+    result.square_4 = "" + reportMonth.square_4;
+    result.depth_4 = "" + reportMonth.depth_4;
+    result.external_height_4 = "" + reportMonth.external_height_4;
+    result.internal_height_4 = "" + reportMonth.internal_height_4;
+
+    result.rg_number = "" + reportMonth.rg_number;
+    result.rg_volume = "" + reportMonth.rg_volume;
+    result.rg_range = "" + reportMonth.rg_range;
+    result.checker = "" + reportMonth.checker;
+    result.creation_date = "" + reportMonth.creation_date;
+    result.comments = "" + reportMonth.comments;
+
+    var toolsTable = [];
+    var i = 0;
+  
+    for (tool in tools) {
+      if (typeof reportMonth.tools[tools[tool]._id] != "undefined") {
+        toolsTable.push({
+          toolName: tools[tool].name
+        })
+      }
+      toolsTable[i].toolNumber = reportMonth.tools[tools[tool]._id].number;
+      toolsTable[i].toolCheck = reportMonth.tools[tools[tool]._id].check;
+      toolsTable[i].toolTest = reportMonth.tools[tools[tool]._id].test;
+      i++;
+    }
+  
+  result.toolsTable = toolsTable;
+
     /*["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g"].forEach(function(item, i, arr) {
       var date = new Date(annuals[item]);
       console.log(typeof date)
