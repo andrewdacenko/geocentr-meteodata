@@ -183,7 +183,7 @@ app.get('/annuals/day', function(req, res) {
         station_id: stationId
       }, function(err, annual) {
 				if(err) return callback(err);
-        if (annual == null) redirectToErrorPage(res);
+       // if (annual == null) redirectToErrorPage(res);
         //console.log(annual);
         callback(null, annual)
       });
@@ -276,16 +276,17 @@ app.get('/annuals/day', function(req, res) {
       //console.log('calcValue, arr = ', arr, field, from, to);
       var result = [];
 			
-			try{
+			//try{
 				for (var i = 1; i < arr.length; i++) {
 					if ((arr[i]) && +arr[i].day >= from && +arr[i].day <= to) {
 						result.push(arr[i][field]);
 					}
 				}
-			} catch(e){
-				console.log(e.name + ":" + e.message + "\n" + e.stack);
-				redirectToErrorPage(res);
-			}
+			//} 
+      //catch(e){
+			//	console.log(e.name + ":" + e.message + "\n" + e.stack);
+			//redirectToErrorPage(res);
+			//}
 
       return findMiddle(result, mid, monthNum, to-from);
     }
@@ -368,7 +369,7 @@ app.get('/days/day', function(req, res) {
         station_id: stationId
       }, function(err, annual) {
         if (err) return callback(err); 
-				if (annual == null) redirectToErrorPage(res);
+				//if (annual == null) redirectToErrorPage(res);
         callback(null, annual)
       });
     },
@@ -377,7 +378,7 @@ app.get('/days/day', function(req, res) {
         _id: annual.station_id
       }, function(err, station) {
         if (err || station == null) return callback(err);
-        annual.station = station.name;
+        annual.station = station;
         callback(null, annual);
       })
     },
@@ -391,6 +392,28 @@ app.get('/days/day', function(req, res) {
           annuals: annuals,
           days: days
         });
+      });
+    },
+    ///////  MONTH
+  
+    function findMonth(annuals, callback) {
+      db.months.findOne({
+        station_id: stationId,
+        year: year,
+        month: month
+      }, function(err, month) {
+        if (err || month == null) return callback(err);
+        annuals.month = month;
+        callback(null, annuals);
+      });
+    },
+  /////// TOOLS
+  
+    function getAllTools(annuals, callback) {
+      db.tools.find({}, function(err, allTools) {
+        if (err || allTools == null) return callback(err);
+        annuals.tools = allTools;
+        callback(null, annuals);
       });
     }
   ], function(err, data) {
@@ -408,18 +431,28 @@ app.get('/days/day', function(req, res) {
     }
 
     var annuals = data.annuals;
+    var reportMonth = data.month;
+    var tools = data.tools;
     
     var numberOfDays = function(year, month) {
       var d = new Date(year, month, 0);
       return d.getDate();
     }
 
-    var findMiddle = function(arr, mid, monthNum, daysCount) {
+    var findMiddle = function(arr, mid, monthNum, daysCount, falls) {
       var count = 0;
       var result = 0;
 
+      if ((mid) && (falls)){
+        return "";
+      }
+
       for (var i = 0; i < arr.length; i++) {
-        if (isNaN(+arr[i]) || (arr[i] == "") || (arr[i] == "-0")) {
+        if ((arr[i].toString().toLowerCase() == "лід") || (arr[i] == "-0")){
+          count++;
+          continue;
+        }
+        if (isNaN(+arr[i]) || (arr[i] == "")) {
           continue;
         }
         result += (+arr[i]*10) ^ 0;
@@ -433,14 +466,52 @@ app.get('/days/day', function(req, res) {
         result = Math.round(result * 10) / 10;
       } 
 
-      if (daysCount == 30){
-          return result;
+      if (count == 0)
+        return "";
+
+      if ((daysCount == 30) && (!falls)){
+          if ((count<25) && (!mid)){
+            switch (count){
+              case 1: result += String.fromCharCode(185); break;
+              case 2: 
+              case 3: result += String.fromCharCode(176 + count); break;
+              case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
+              case 11: result += String.fromCharCode(185) + String.fromCharCode(185); break;
+              case 12: 
+              case 13: result += String.fromCharCode(185) + String.fromCharCode(176 + count - 10); break;
+              case 14:
+              case 15:
+              case 16:
+              case 17:
+              case 18:
+              case 19: result += String.fromCharCode(185) + String.fromCharCode(8304 + count - 10); break;
+              case 20: result += String.fromCharCode(178) + String.fromCharCode(8304); break;
+              case 21: result += String.fromCharCode(178) + String.fromCharCode(185); break;
+              case 22:
+              case 23: result += String.fromCharCode(178) + String.fromCharCode(176 + count - 20); break;
+              case 24: result += String.fromCharCode(178) + String.fromCharCode(8304 + count - 20); break;
+              default: result += String.fromCharCode(8304 + count); 
+            }
+          }
+          if ((count < 25) && (mid)){
+            return "";      
+          }
+          if (count >= 25){
+            switch (count){
+              case 25: 
+              case 26:
+              case 27: result += String.fromCharCode(178) + String.fromCharCode(8304 + count - 20); break;
+              case 28: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8312); break;
+              case 29: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8313); break;
+              case 30: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(179) + String.fromCharCode(8304); break;
+            }
+          }
+          return result.toString().replace(".",",");
       }
 
-      if (count == 0)
-        return "-";
+      
 
-      if (count < daysCount + 1){
+      if ((count < daysCount + 1) && (!falls)){
         switch (count){
           case 1: result += String.fromCharCode(185); break;
           case 2: 
@@ -453,7 +524,7 @@ app.get('/days/day', function(req, res) {
       }
       return result;
     };
-    var calcValue = function(arr, from, to, field, mid, monthNum) {
+    var calcValue = function(arr, from, to, field, mid, monthNum, isFalls) {
       //console.log('calcValue, arr = ', arr, field, from, to);
       var result = [];
 
@@ -463,7 +534,7 @@ app.get('/days/day', function(req, res) {
         }
       }
 
-      return findMiddle(result, mid, monthNum, (to-from));
+      return findMiddle(result, mid, monthNum, (to-from), isFalls);
     }
 
     var result = {};
@@ -491,36 +562,38 @@ app.get('/days/day', function(req, res) {
     });
     //["vapour_2", "temp_2", "press_2", "temp_a", "part_press", "wind", "soil_temp", "falls"].forEach(function(item, j, arr) {
       ["day", "vapour_1", "temp_1", "press_1", "vapour_2", "temp_2", "press_2", "vapour_3", 
-       "temp_3", "press_3", "temp_w_4", "press_4", "temp_a", "part_press", "wind", "falls", 
+       "temp_3", "press_3", "temp_w_4", "press_4", "temp_a", "part_press", "wind", "soil_temp", "falls", 
        "press_diff_1", "press_diff_2", "press_diff_3", "press_diff_4", "comment"].forEach(function(item, j, arr) {
-      //var mid = (item == "falls") ? 0 : 1;
-			try{			
-				for(var i = 0; i < 10; i++){
-					table[i][item] = (obj[month][i+1][item] + "").replace(".",",");
-				}
-			
-				table[10][item] = calcValue(obj[month], 1, 10, item, false, month); //suma
-				table[11][item] = calcValue(obj[month], 1, 10, item, true, month); //seredne
+      var isFalls = (item == "falls") ? 1 : 0;
+			//try{			
+		for(var i = 0; i < 10; i++){
+      if (typeof obj[month][i+1] != "undefined")
+        table[i][item] = (obj[month][i+1][item] + "").replace(".",",");
+    }
+    
+    table[10][item] = calcValue(obj[month], 1, 10, item, false, month, isFalls); //suma
+    table[11][item] = calcValue(obj[month], 1, 10, item, true, month, isFalls); //seredne
 
-				for(var i = 12; i < 22; i++){
-					table[i][item] = (obj[month][i-1][item] + "").replace(".",",");
-				}
+    for(var i = 12; i < 22; i++){
+      if (typeof obj[month][i-1] != "undefined")
+        table[i][item] = (obj[month][i-1][item] + "").replace(".",",");
+    }
 
-				table[22][item] = calcValue(obj[month], 11, 20, item, false, month); //suma
-				table[23][item] = calcValue(obj[month], 11, 20, item, true, month); //seredne
-				
-				for(var i = 24; i < 35; i++){
-					if (typeof obj[month][i-3] != "undefined") 
-						table[i][item] = (obj[month][i-3][item] + "").replace(".",",");
-				}
-			} catch(e) {
-				redirectToErrorPage(res);
-			}
+    table[22][item] = calcValue(obj[month], 11, 20, item, false, month, isFalls); //suma
+    table[23][item] = calcValue(obj[month], 11, 20, item, true, month, isFalls); //seredne
+    
+    for(var i = 24; i < 35; i++){
+      if (typeof obj[month][i-3] != "undefined") 
+        table[i][item] = (obj[month][i-3][item] + "").replace(".",",");
+    }	
+			//} catch(e) {
+			//	redirectToErrorPage(res);
+			//}
 			
-      table[35][item] = calcValue(obj[month], 21, 31, item, false, month); //suma
-      table[36][item] = calcValue(obj[month], 21, 31, item, true, month); //seredne
-      table[37][item] = calcValue(obj[month], 1, 31, item, false, month); //suma
-      table[38][item] = calcValue(obj[month], 1, 31, item, true, month); //seredne
+      table[35][item] = calcValue(obj[month], 21, 31, item, false, month, isFalls); //suma
+      table[36][item] = calcValue(obj[month], 21, 31, item, true, month, isFalls); //seredne
+      table[37][item] = calcValue(obj[month], 1, 31, item, false, month, isFalls); //suma
+      table[38][item] = calcValue(obj[month], 1, 31, item, true, month, isFalls); //seredne
     });
     result['table'] = table;
     
@@ -530,7 +603,7 @@ app.get('/days/day', function(req, res) {
  
     result.year = "" + year;
     result.month = "" + month;
-    result.station = annuals.number + ". " + annuals.station;
+    result.station = annuals.number + ". " + annuals.station.name;
     /*["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g"].forEach(function(item, i, arr) {
       var date = new Date(annuals[item]);
       console.log(typeof date)
@@ -839,10 +912,10 @@ app.delete('/days/:id', function(req, res) {
   });
 });
 
-function redirectToErrorPage(res, message){
+/*function redirectToErrorPage(res, message){
 	message = (typeof message == "undefined") ? "" : message;
 	res.send("<br><br><br><br><h3 align=\"center\">Недостатньо даних для генерації звіту! <br><br><br> Натисніть клавішу \"Backspace\" <br> та перевірте правильність даних необхідних для генерування звіту.\n</h3>" + message);
-}
+}*/
 
 app.listen(app.get('port'));
 console.log('Server listening on port ' + app.get('port'));
