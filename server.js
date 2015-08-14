@@ -284,19 +284,32 @@ app.get('/annuals/day', function(req, res) {
           return result;
       }*/
 
-      
-
-      if ((count < daysCount + 1) && (mid)){
-        switch (count){
-          case 1: result += String.fromCharCode(185); break;
-          case 2: 
-          case 3: result += String.fromCharCode(176 + count); break;
-          //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
-          //case 10: result += ""; break;
-          case 10: result += (numberOfDays(+annuals.year, monthNum) != 31) ? "" : String.fromCharCode(185) + String.fromCharCode(8304); break;
-          default: result += String.fromCharCode(8304 + count);
+      if (mid) {
+        if (count < daysCount + 1){
+          switch (count){
+            case 1: result += String.fromCharCode(185); break;
+            case 2: 
+            case 3: result += String.fromCharCode(176 + count); break;
+            //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
+            //case 10: result += ""; break;
+            case 10: result += (numberOfDays(+annuals.year, monthNum) != 31) ? "" : String.fromCharCode(185) + String.fromCharCode(8304); break;
+            default: result += String.fromCharCode(8304 + count);
+          }
+          result = result.toString().replace(".",",");
         }
-        result = result.toString().replace(".",",");
+      } else {
+        if (arr.length < daysCount + 1) {
+          switch (arr.length){
+            case 1: result += String.fromCharCode(185); break;
+            case 2: 
+            case 3: result += String.fromCharCode(176 + arr.length); break;
+            //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
+            //case 10: result += ""; break;
+            case 10: result += (numberOfDays(+annuals.year, monthNum) != 31) ? "" : String.fromCharCode(185) + String.fromCharCode(8304); break;
+            default: result += String.fromCharCode(8304 + arr.length);
+          }
+          result = result.toString().replace(".",",");
+        }
       }
       return {
         value: result.toString().replace(".",","),
