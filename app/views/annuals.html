@@ -18,11 +18,14 @@
   </div>
 
   <label>Рік: </label>
-  <div class="input-group input-group-sm" style="width:100px;">
+  <div class="input-group input-group-sm" style="width:200px;">
     <input type="text" class="form-control" placeholder="2015" ng-model="year">
+    <span class="input-group-btn">
+      <a ng-href="annuals/day?station={{station}}&year={{year || 2015}}" class="btn btn-default">Генерувати</a>
+    </span>
   </div>
 
-  <label>Місяць початку: </label>
+  <!--<label>Місяць початку: </label>
   <div class="input-group input-group-sm" style="width:100px;">
     <input type="text" class="form-control" placeholder="2" ng-model="start">
   </div>
@@ -33,7 +36,7 @@
     <span class="input-group-btn">
       <a ng-href="annuals/day?station={{station}}&year={{year || 2015}}&start={{start || 2}}&end={{end || 8}}" class="btn btn-default">Генерувати</a>
     </span>
-  </div>
+  </div>-->
 </div>
 <hr>
 

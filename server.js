@@ -172,8 +172,8 @@ app.get('/annuals', function(req, res) {
 app.get('/annuals/day', function(req, res) {
   var stationId = req.query.station;
   var year = +req.query.year || 2015;
-  var start = +req.query.start || 2;
-  var end = +req.query.end || 8;
+  var start = 1;
+  var end = 12;
   
   async.waterfall([
 
@@ -235,12 +235,38 @@ app.get('/annuals/day', function(req, res) {
       var result = 0;
 
       for (var i = 0; i < arr.length; i++) {
-        if (isNaN(+arr[i]) || (arr[i] == "") || (arr[i] == "-0")) {
+        if ((arr[i].toString().toLowerCase() == "лід") || (arr[i] == "-0")){
+          count++;
+          continue;
+        }
+        if (isNaN(+arr[i]) || (arr[i] == "")) {
           continue;
         }
         result += (+arr[i]*10) ^ 0;
         count++;
       };
+
+      if (count == 0){
+        return {
+          value: "-",
+          count: count,
+          observationDaysCount: arr.length
+        };
+      }
+      if (count == 0) {
+        if (arr.length != 0 && !mid) {
+          return {
+          value: "0,0",
+          count: count,
+          observationDaysCount: arr.length
+        };
+        }
+        return {
+          value: "-",
+          count: count,
+          observationDaysCount: arr.length
+        };
+      }
 
       result /= 10;
 
@@ -249,29 +275,36 @@ app.get('/annuals/day', function(req, res) {
         result = Math.round(result * 10) / 10;
       } 
 
-      if (daysCount == 30){
+      result = result.toFixed(1);
+
+      /*if (daysCount == 30){
         if (count != numberOfDays(+annuals.year, monthNum) && mid)
           return "-";
         else
           return result;
-      }
+      }*/
 
-      if (count == 0)
-        return "-";
+      
 
-      if (count < daysCount + 1){
+      if ((count < daysCount + 1) && (mid)){
         switch (count){
           case 1: result += String.fromCharCode(185); break;
           case 2: 
           case 3: result += String.fromCharCode(176 + count); break;
           //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
-          case 10: result += ""; break;
+          //case 10: result += ""; break;
+          case 10: result += (numberOfDays(+annuals.year, monthNum) != 31) ? "" : String.fromCharCode(185) + String.fromCharCode(8304); break;
           default: result += String.fromCharCode(8304 + count);
         }
-        result = result.replace(".",",");
+        result = result.toString().replace(".",",");
       }
-      return result;
+      return {
+        value: result.toString().replace(".",","),
+        count: count,
+        observationDaysCount: arr.length
+      }
     };
+
     var calcValue = function(arr, from, to, field, mid, monthNum) {
       //console.log('calcValue, arr = ', arr, field, from, to);
       var result = [];
@@ -282,18 +315,54 @@ app.get('/annuals/day', function(req, res) {
 						result.push(arr[i][field]);
 					}
 				}
-			//} 
-      //catch(e){
-			//	console.log(e.name + ":" + e.message + "\n" + e.stack);
-			//redirectToErrorPage(res);
-			//}
 
       return findMiddle(result, mid, monthNum, to-from);
     }
 
+    var calcMonthValue = function(firstDecade, secondDecade, thirdDecade, mid, monthNum) {
+      var daysCount = firstDecade.count + secondDecade.count + thirdDecade.count;
+      if (mid) {
+        if (daysCount < 25) {
+          return "-";
+        }
+
+        var sum = parseValue(firstDecade.value) + parseValue(secondDecade.value) + parseValue(thirdDecade.value);
+        sum /= 3;
+        sum = sum.toFixed(1);
+        switch (daysCount){
+          case 25: 
+          case 26:
+          case 27: sum += String.fromCharCode(178) + String.fromCharCode(8304 + daysCount - 20); break;
+          case 28: sum += (daysCount == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8312); break;
+          case 29: sum += (daysCount == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8313); break;
+          case 30: sum += (daysCount == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(179) + String.fromCharCode(8304); break;
+        }
+        return sum.toString().replace(".",",");
+      }else {
+        var sumObsDays = firstDecade.observationDaysCount + secondDecade.observationDaysCount + thirdDecade.observationDaysCount;
+        
+        if (sumObsDays < 25) {
+          return "-";
+        }
+
+        var sum = parseValue(firstDecade.value) + parseValue(secondDecade.value) + parseValue(thirdDecade.value);
+        sum = sum.toFixed(1);
+        switch (sumObsDays){
+          case 25: 
+          case 26:
+          case 27: sum += String.fromCharCode(178) + String.fromCharCode(8304 + sumObsDays - 20); break;
+          case 28: sum += (sumObsDays == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8312); break;
+          case 29: sum += (sumObsDays == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8313); break;
+          case 30: sum += (sumObsDays == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(179) + String.fromCharCode(8304); break;
+        }
+        return sum.toString().replace(".",",");
+
+      } 
+    }
+
     var result = {};
     var obj = {};
-
+    
     for (var i = 0; i < days.length; i++) {
       var day = days[i];
       if (obj[day.month]){
@@ -314,10 +383,22 @@ app.get('/annuals/day', function(req, res) {
       });
       ["vapour_2", "temp_2", "press_2", "temp_a", "part_press", "wind", "soil_temp", "falls"].forEach(function(item, j, arr) {
         var mid = (item == "falls") ? 0 : 1;
-        table[0][item] = calcValue(obj[i], 1, 10, item, mid, i);
-        table[1][item] = calcValue(obj[i], 11, 20, item, mid, i);
-        table[2][item] = calcValue(obj[i], 21, 31, item, mid, i);
-        table[3][item] = calcValue(obj[i], 1, 31, item, mid, i);
+        
+				if (typeof obj[i] != "undefined") {
+          var firstDecade = calcValue(obj[i], 1, 10, item, mid, i);
+          var secondDecade = calcValue(obj[i], 11, 20, item, mid, i);
+          var thirdDecade = calcValue(obj[i], 21, 31, item, mid, i);
+
+					table[0][item] = firstDecade.value;
+					table[1][item] = secondDecade.value;
+					table[2][item] = thirdDecade.value;
+					//table[3][item] = calcValue(obj[i], 1, 31, item, mid, i);
+          table[3][item] = calcMonthValue(firstDecade, secondDecade, thirdDecade, mid, i);
+				} else {
+					for (var j = 0; j < table.length; j++)
+						table[j][item] = "-";
+				}
+				
       });
       result['table' + i] = table;
     };
@@ -350,7 +431,7 @@ app.get('/annuals/day', function(req, res) {
       };
 
       res.setHeader('Content-Type', 'application/vnd.openxmlformats');
-      res.setHeader("Content-Disposition", "attachment; filename=Yearly report Station" + annuals.number + " " + year + "_" + start + "-" + end + ".xlsx");
+      res.setHeader("Content-Disposition", "attachment; filename=Yearly report Station" + annuals.number + " " + year + ".xlsx");
       res.end(binary, 'binary');
     })
   });
@@ -459,6 +540,13 @@ app.get('/days/day', function(req, res) {
         count++;
       };
 
+      if (count == 0) {
+        if (arr.length != 0 && falls) {
+          return "0,0";
+        }
+        return "";
+      }
+			
       result /= 10;
 
       if (mid){
@@ -466,63 +554,64 @@ app.get('/days/day', function(req, res) {
         result = Math.round(result * 10) / 10;
       } 
 
-      if (count == 0)
-        return "";
+      result = result.toFixed(1);
 
       if ((daysCount == 30) && (!falls)){
-          if ((count<25) && (!mid)){
-            switch (count){
-              case 1: result += String.fromCharCode(185); break;
-              case 2: 
-              case 3: result += String.fromCharCode(176 + count); break;
-              case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
-              case 11: result += String.fromCharCode(185) + String.fromCharCode(185); break;
-              case 12: 
-              case 13: result += String.fromCharCode(185) + String.fromCharCode(176 + count - 10); break;
-              case 14:
-              case 15:
-              case 16:
-              case 17:
-              case 18:
-              case 19: result += String.fromCharCode(185) + String.fromCharCode(8304 + count - 10); break;
-              case 20: result += String.fromCharCode(178) + String.fromCharCode(8304); break;
-              case 21: result += String.fromCharCode(178) + String.fromCharCode(185); break;
-              case 22:
-              case 23: result += String.fromCharCode(178) + String.fromCharCode(176 + count - 20); break;
-              case 24: result += String.fromCharCode(178) + String.fromCharCode(8304 + count - 20); break;
-              default: result += String.fromCharCode(8304 + count); 
-            }
-          }
-          if ((count < 25) && (mid)){
-            return "";      
-          }
-          if (count >= 25){
-            switch (count){
-              case 25: 
-              case 26:
-              case 27: result += String.fromCharCode(178) + String.fromCharCode(8304 + count - 20); break;
-              case 28: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8312); break;
-              case 29: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8313); break;
-              case 30: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(179) + String.fromCharCode(8304); break;
-            }
-          }
-          return result.toString().replace(".",",");
+				if ((count<25) && (!mid)){
+					switch (count){
+						case 1: result += String.fromCharCode(185); break;
+						case 2: 
+						case 3: result += String.fromCharCode(176 + count); break;
+						case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
+						case 11: result += String.fromCharCode(185) + String.fromCharCode(185); break;
+						case 12: 
+						case 13: result += String.fromCharCode(185) + String.fromCharCode(176 + count - 10); break;
+						case 14:
+						case 15:
+						case 16:
+						case 17:
+						case 18:
+						case 19: result += String.fromCharCode(185) + String.fromCharCode(8304 + count - 10); break;
+						case 20: result += String.fromCharCode(178) + String.fromCharCode(8304); break;
+						case 21: result += String.fromCharCode(178) + String.fromCharCode(185); break;
+						case 22:
+						case 23: result += String.fromCharCode(178) + String.fromCharCode(176 + count - 20); break;
+						case 24: result += String.fromCharCode(178) + String.fromCharCode(8304 + count - 20); break;
+						default: result += String.fromCharCode(8304 + count); 
+					}
+				}
+				if ((count < 25) && (mid)){
+					return "";      
+				}
+				if (count >= 25){
+					switch (count){
+						case 25: 
+						case 26:
+						case 27: result += String.fromCharCode(178) + String.fromCharCode(8304 + count - 20); break;
+						case 28: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8312); break;
+						case 29: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(178) + String.fromCharCode(8313); break;
+						case 30: result += (count == numberOfDays(+annuals.year, monthNum)) ? "" : String.fromCharCode(179) + String.fromCharCode(8304); break;
+					}
+				}
+				return result.toString().replace(".",",");
       }
 
       
 
       if ((count < daysCount + 1) && (!falls)){
+				
         switch (count){
           case 1: result += String.fromCharCode(185); break;
           case 2: 
           case 3: result += String.fromCharCode(176 + count); break;
           //case 10: result += String.fromCharCode(185) + String.fromCharCode(8304); break;
-          case 10: result += ""; break;
+          //case 10: result += ""; break;
+          case 10: result += (numberOfDays(+annuals.year, monthNum) != 31) ? "" : String.fromCharCode(185) + String.fromCharCode(8304); break;
           default: result += String.fromCharCode(8304 + count);
         }
         result = result.replace(".",",");
       }
-      return result;
+      return result.replace(".",",");
     };
     var calcValue = function(arr, from, to, field, mid, monthNum, isFalls) {
       //console.log('calcValue, arr = ', arr, field, from, to);
@@ -613,7 +702,7 @@ app.get('/days/day', function(req, res) {
     result.height = "" + annuals.station.height;
     result.head = "" + reportMonth.head;
     result.creator = "" + reportMonth.creator;
-    //result.snow_melting = "" + annuals.snow_melting;
+
     ["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g", "ice_clean", "water_freezing", "observation_begin_w", "observation_end_w", "ice_cover"].forEach(function(item, i, arr) {
       var date = new Date(annuals[item]);
       console.log(typeof date)
@@ -626,6 +715,7 @@ app.get('/days/day', function(req, res) {
       else
         result[item] = "";
     })
+		
     result.square_1 = "" + reportMonth.square_1;
     result.depth_1 = "" + reportMonth.depth_1;
     result.external_height_1 = "" + reportMonth.external_height_1;
@@ -650,6 +740,7 @@ app.get('/days/day', function(req, res) {
     result.creation_date = "" + reportMonth.creation_date;
     result.comments = "" + reportMonth.comments;
 
+		
     var toolsTable = [];
     var i = 0;
   
@@ -658,25 +749,16 @@ app.get('/days/day', function(req, res) {
         toolsTable.push({
           toolName: tools[tool].name
         })
-      }
-      toolsTable[i].toolNumber = reportMonth.tools[tools[tool]._id].number;
-      toolsTable[i].toolCheck = reportMonth.tools[tools[tool]._id].check;
-      toolsTable[i].toolTest = reportMonth.tools[tools[tool]._id].test;
-      i++;
+				toolsTable[i].toolNumber = reportMonth.tools[tools[tool]._id].number;
+				toolsTable[i].toolCheck = reportMonth.tools[tools[tool]._id].check;
+				toolsTable[i].toolTest = reportMonth.tools[tools[tool]._id].test;
+				i++;
+			}
     }
   
-  result.toolsTable = toolsTable;
-
-    /*["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g"].forEach(function(item, i, arr) {
-      var date = new Date(annuals[item]);
-      console.log(typeof date)
-      var values = [date.getDate(), date.getMonth() + 1];
-      for (var id in values) {
-        values[id] = values[id].toString().replace(/^([0-9])$/, '0$1');
-      }
-      result[item] = values[0] + '.' + values[1];
-    }); */
-
+		result.toolsTable = toolsTable;
+		
+		
     //need to output result
     var template_file = path.join(__dirname, 'templates', 'daily.xlsx');
 
@@ -979,6 +1061,13 @@ app.delete('/days/:id', function(req, res) {
 	message = (typeof message == "undefined") ? "" : message;
 	res.send("<br><br><br><br><h3 align=\"center\">Недостатньо даних для генерації звіту! <br><br><br> Натисніть клавішу \"Backspace\" <br> та перевірте правильність даних необхідних для генерування звіту.\n</h3>" + message);
 }*/
+
+var parseValue = function(stringValue) {
+  if (stringValue.indexOf(",") != -1)
+    return +(stringValue.slice(0, stringValue.indexOf(",") + 2).replace(",","."));
+  else
+    return +stringValue;
+}
 
 app.listen(app.get('port'));
 console.log('Server listening on port ' + app.get('port'));
