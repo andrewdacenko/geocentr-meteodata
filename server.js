@@ -428,7 +428,10 @@ app.get('/annuals/day', function(req, res) {
       for (var id in values) {
         values[id] = values[id].toString().replace(/^([0-9])$/, '0$1');
       }
-      result[item] = values[0] + '.' + values[1];
+      if (!isNaN(values[0]) && !isNaN(values[1]))
+        result[item] = values[0] + '.' + values[1];
+      else
+        result[item] = "";
     })
 
     //need to output result
