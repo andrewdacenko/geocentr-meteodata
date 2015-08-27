@@ -125,17 +125,18 @@
         });
         var name = tool.length ? tool[0].name : '';
         var tool = month.tools[key];
-        var row = ['<td>', [name, tool.number, tool.check, tool.test].join('</td><td>'), '</td>'].join('');
-
-        return (!!tool.number && !!tool.check && !!tool.test) ? arr.concat([row]) : arr;
+				var row = ['<td>', [name, tool.number, tool.check, tool.test].join('</td><td>'), '</td>'].join('');
+				
+        //return (!!tool.number && !!tool.check && !!tool.test) ? arr.concat([row]) : arr;
+				return arr.concat([row]);
       }, []).join('</tr><tr>');
 
       return [
         '<table><thead><tr>',
-        '<th>&nbsp;Tool&nbsp;</th>',
-        '<th>&nbsp;Number&nbsp;</th>',
-        '<th>&nbsp;Check&nbsp;Date&nbsp;</th>',
-        '<th>&nbsp;Test&nbsp;Date&nbsp;</th></thead>',
+        '<th>&nbsp;Прилад&nbsp;</th>',
+        '<th>&nbsp;Номер&nbsp;</th>',
+        '<th>&nbsp;Дата&nbsp;повірки&nbsp;</th>',
+        '<th>&nbsp;Дата&nbsp;випроб. та інше&nbsp;</th></thead>',
         '<tbody><tr>', rows,
         '</tr></tbody></table>'
       ].join('');
