@@ -235,7 +235,7 @@ app.get('/annuals/day', function(req, res) {
       var result = 0;
 
       for (var i = 0; i < arr.length; i++) {
-        if ((arr[i].toString().toLowerCase() == "лід") || (arr[i] == "-0")){
+        if ((arr[i].toString().toLowerCase() == "лід") || (arr[i].toString().toLowerCase() == "сніг") || (arr[i] == "-0")){
           count++;
           continue;
         }
@@ -545,7 +545,7 @@ app.get('/days/day', function(req, res) {
       }
 
       for (var i = 0; i < arr.length; i++) {
-        if ((arr[i].toString().toLowerCase() == "лід") || (arr[i] == "-0")){
+        if ((arr[i].toString().toLowerCase() == "лід") || (arr[i].toString().toLowerCase() == "сніг") || (arr[i] == "-0")){
           count++;
           continue;
         }
@@ -660,7 +660,7 @@ app.get('/days/day', function(req, res) {
     var table = [];
     ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'сума I дек.', 'середнє',
      '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', 'сума II дек.', 'середнє',
-     '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', 'сума III дек.', 'середнє', 'сума за м-ц', 'середнє за м-ц'].forEach(function(item, j, arr) {
+     '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', 'сума III дек.', 'середнє', 'сума за м-ць', 'середнє за м-ць'].forEach(function(item, j, arr) {
       table.push({
         index: item
       })
