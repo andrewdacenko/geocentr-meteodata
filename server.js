@@ -722,7 +722,7 @@ app.get('/days/day', function(req, res) {
     ["snow_melting", "water_freezing", "observation_begin_g", "observation_end_g", "ice_clean", "water_freezing", "observation_begin_w", "observation_end_w", "ice_cover"].forEach(function(item, i, arr) {
       var date = new Date(annuals[item]);
       //console.log(typeof date)
-      var values = [date.getDate(), date.getMonth(), date.getYear() + 1];
+      var values = [date.getDate(), date.getMonth() + 1, date.getYear() + 1];
       for (var id in values) {
         values[id] = values[id].toString().replace(/^([0-9])$/, '0$1');
       }

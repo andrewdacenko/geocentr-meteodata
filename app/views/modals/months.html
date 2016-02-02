@@ -36,12 +36,12 @@
         <tr ng-repeat="tool in modalMonthsCtrl.tools">
           <td ng-bind="tool.name"></td>
           <td>
-            <input type="number"
+            <input type="text"
               class="form-control"
               ng-model="modalMonthsCtrl.month.tools[tool._id].number">
           </td>
           <td>
-            <input type="number"
+            <input type="text"
               class="form-control"
               ng-model="modalMonthsCtrl.month.tools[tool._id].check">
           </td>
